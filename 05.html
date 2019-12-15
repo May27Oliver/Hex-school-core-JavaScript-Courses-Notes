@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var object={
+            test:function(){
+                console.log(this.name,arguments[0],arguments[1]);
+            }
+        }
+
+        var man={name:'blackie'};
+        var woman={name:'karma'};
+
+        //Apply()
+        console.log("This Apply");
+        object.test.apply(man,['male','28']);
+
+        //Call()
+        console.log("This Call");
+        object.test.call(woman,'female','27');
+    </script>
+</body>
+</html>
