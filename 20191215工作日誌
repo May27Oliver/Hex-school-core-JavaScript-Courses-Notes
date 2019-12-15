@@ -1,0 +1,59 @@
+20191215工作日誌 
+
+JS 的引擎是單執行緒的，瀏覽器無論在什麼時候都只有一個線程在執行 JS 程式。
+
+Tokenizing語法單元化，把js code語法單元化，看每個字詞在電腦理解是什麼意思。
+
+Tree抽象結構樹
+
+
+
+**JavaScript直譯器代碼轉換過程
+
+語法基本單元化(Tokenizing)-->抽象結構樹AST(Abstract Syntax Tree)-->代碼生成
+
+有宣告變數跟沒宣告變數在直譯器代碼轉換過程會有不一樣的顯示，沒宣告會出現expression，有宣告會有declaration。
+
+LHS left -hand side取值來自於左側變數上
+如:
+var ming = "小明";
+
+RHS right-hand side取直來自於右側變數上
+如：
+console.log(ming);
+var man = ming; //ming是rhs取得，再lhs丟進man中
+
+javaScript運行過程中如果有任何一行程式碼有錯就不會繼續執行接下去的程式。
+
+
+
+**語法作用域Lexical scope
+
+靜態作用域：語法解析時就已經決定作用域，且不會改變。
+
+動態作用域：變數的作用域在函式調用時才決定。
+
+JavaScript是靜態作用域，作用域有分全域作用域與函式內的作用域，函式內的作用域內的變數如果未宣告而呼叫
+
+則會向全域作用域找尋，如果也找不到就會出現ReferenceError:xxx is not defined的字樣。
+
+var value =1;
+
+function fn1(){
+    console.log(value);//靜態作用域會向函式外查找變數，是故value=1;
+//動態作用域則會在函式調用變數時在調用的函式中查找變數，是故value=2
+}
+
+function fn2(){
+    var value = 2;
+    fn1();
+}
+fn2();
+
+**函式撰寫時就定義好了作用域，但必須呼叫它才會產生執行環境。
+
+**寫好程式碼後可以用chrome瀏覽器內建的F12裡的source監看程式執行的過程，先按暫停，然後一步一步往下點，
+
+當瀏覽器開始執行程式時，會先開啟全域執行環境，接著執行呼叫的function裡面的執行環境，在執行function裡的
+
+callback function的執行環境，這個一層一層開，就叫做＂堆疊＂，堆疊內的任務執行完會消失。
