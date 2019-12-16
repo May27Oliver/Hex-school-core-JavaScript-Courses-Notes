@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*執行環境內有兩個動作，一個是創造環境，一個是執行*/
+
+// var Ming;//創造階段
+
+// Ming = '小明';//執行
+
+// console.log(Ming);
+
+/*函式有優先執行*/
+// callName();//這裡就有執行了，有抓到函式裡的值
+
+// function callName(){
+//     console.log('呼叫小明');
+// }
+
+//函式陳述式，沒有hoist
+// var callName;
+
+// var callName = function(){
+//     console.log('呼叫小明');
+// }
+// callName();
+
+/*宣告函式會比宣告變數早出現在執行環境中*/
+// function callName(){
+//     console.log('呼叫小明1');
+// }
+
+// var callName=function (){
+//     console.log('呼叫小明2');
+// }
+// callName();//變數宣告比函式晚出現，取相同的名字變數宣告的陳述句會蓋掉函式宣告的表達句
+
+
+/*例題一*/
+// callName();
+
+// function callName(){
+//     console.log(Ming);//這裡會印出undefined
+// }
+
+// var Ming = '小明';
+
+/*解題一*/
+
+//創造環境
+
+// function callName(){
+//     console.log(Ming);//這裡會印出undefined
+// }
+
+//var Ming;
+//執行
+// callName();//印出undefined
+// Ming='小明';
+
+/*例題二*/
+// function callName(){
+//     console.log('小明');
+// }
+// callName();//第二次執行
+
+// function callName(){
+//     console.log('杰倫');
+// }
+// callName();//第一次執行
+//杰倫callName()蓋掉小明callName()故印出兩次杰倫
+
+//創造階段
+// function callName(){
+//     console.log('小明');
+// }
+// function callName(){
+//     console.log('杰倫');
+// }
+// //執行
+// callName();
+// callName();
+
+
+/*例題三*/
+// whosName();
+// function whosName(){
+//     if(name){
+//         name = '杰倫';
+//     }
+// }
+// var name = '小明';
+// console.log(name);
+
+/*解題三*/
+//創造環境
+function whosName(){
+    if(name){
+        name = '杰倫';
+    }
+}
+var name;//因為name尚未給值，是undefined，丟進if(name)為false不執行
+//執行
+whosName();//什麼事都不會發生，杰倫不會出現
+name = '小明';
+console.log(name);//小明出現
+</script>    
+</body>
+</html>
