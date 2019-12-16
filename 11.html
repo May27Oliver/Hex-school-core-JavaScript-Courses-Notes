@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //範圍鍊指的是當函式內找不到變數時便會向外層尋找，function向全域、function裡的function向父層的function尋找。 
+    var person = '老媽'
+    function sayHi(){
+        console.log(' hi ' + this.person);
+    }
+
+    function doMorningWork(){
+        var person = '老爸';
+        function meetAuntie(){
+            // var person = '漂亮阿姨'
+            console.log('哈囉~' + person);
+        }
+        // sayHi();
+        meetAuntie();
+    }
+    // sayHi();
+    doMorningWork();
+    </script>
+</body>
+</html>
