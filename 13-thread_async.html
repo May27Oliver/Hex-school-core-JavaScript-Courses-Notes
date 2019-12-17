@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*JavaScript是單執行緒(Single Thread)非同步(Async)程式
+
+單執行緒：單執行緒指JavaScript一次只執行一件事，針對執行環境。
+
+同步：依序執行function，針對程式碼。
+
+非同步：非同步的程式碼如setTimeout()會往後放，等同步程式碼完成後才繼續執行下去。
+
+事件佇列(Event queue)：非同步行為會先移到事件佇列，等同步執行完才執行非同步。*/ 
+
+function eatBreakfast(){
+    console.log('吃早餐');
+}
+
+function washingPlate(){
+    console.log('洗餐盤');
+}
+
+function callSomeone(someone){
+    console.log('打給'+someone)
+    setTimeout(function(){
+        console.log(someone+'回電');
+    },3000);
+}
+
+function doWork(){
+    var auntie = '漂亮阿姨';
+    eatBreakfast();
+    callSomeone(auntie);
+    washingPlate();
+}
+
+doWork();
+//印出順序：吃早餐 打電話給漂亮阿姨 洗盤子 漂亮阿姨回電
+
+</script>
+    
+</body>
+</html>
