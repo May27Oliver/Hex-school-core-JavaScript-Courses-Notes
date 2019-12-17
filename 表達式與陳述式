@@ -1,0 +1,61 @@
+陳述式 Statement  
+JavaScript的語句類型，用於命令執行指定的一系列操作，最大的特徵則是不會回傳結果
+
+陳述式不能賦值在任一結果上。
+
+包括：
+
+流程控制
+Block
+
+就是區塊:
+
+{
+  var ming = '小明';
+}
+
+裡面用冒號是物件。
+區塊裡面就是自己的一個作用域，常用來定義常數。
+
+break
+continue
+Empty
+if...else
+switch
+throw
+try...catch
+
+宣告
+var
+let
+const
+
+函數與類別
+function
+function*
+async function
+return
+class
+
+迭代
+do...while
+for
+for...in
+for...of
+while
+
+
+
+5.表達式 Expression
+又可稱為表達式、運算式，經常透過一些符號結合上下語句並運算及回傳結果。
+
+7.函式陳述式
+function callName(){
+.......
+}
+//具名函式
+
+函式表達式
+var callName = function(){
+
+}
