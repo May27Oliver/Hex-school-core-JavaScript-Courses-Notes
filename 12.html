@@ -110,6 +110,80 @@ var name;//因為name尚未給值，是undefined，丟進if(name)為false不執�
 whosName();//什麼事都不會發生，杰倫不會出現
 name = '小明';
 console.log(name);//小明出現
+
+
+/*題目一*/
+
+// var name;
+
+// function a(name){
+//     console.log('Hello'+ '' + name);
+// }
+// name = 'Tomy';
+// setTimeout(function(){
+//     name = 'Mary';
+//     a(name);
+// },3000)
+// name = 'Casper';
+
+/*解題一*/
+//創造環境
+// function a(name){
+//     console.log('Hello'+ '' + name);
+// }
+// var name;
+//執行
+// name = 'Tomy';
+// setTimeout(function(){
+//     name = 'Mary';
+//     a(name);
+// },3000)
+// name = 'Casper';
+//印出Mary
+
+/*題目二*/
+// function fu(){
+//     if(a){
+//         console.log('Hello');
+//     }else{
+//         console.log('oh!');
+//     }
+// }
+// fu();
+// var a = true;
+//因為執行fu()時a是undefined，所以印出oh!
+
+/*題目三*/
+// function youName(){
+//     console.log('你叫什麼');
+// }
+
+// function sayHi(name){
+//     console.log('oh!'+ ' ' + name + ' ' + '你好!');
+// }
+
+// function myName(name){
+//     setTimeout(function(){
+//         console.log('我叫'+''+name+'!');
+//     },0);
+// }
+
+// var name = 'Tomy';
+// youName();
+// myName(name);
+// sayHi(name);
+
+//setTimeout會最後執行，所以會先出現sayHi()
+
+/*題目四*/
+// function sayHi(name){
+//     console.log(name + '' + '你好!');
+// }
+// sayHi() = 'Tomy';//沒有人這樣寫的，lhs錯誤
+
+/*題目五*/
+
+
 </script>    
 </body>
 </html>

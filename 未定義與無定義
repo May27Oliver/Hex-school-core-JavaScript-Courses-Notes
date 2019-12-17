@@ -23,3 +23,5 @@ null 的類型（typeof）是一個 object。為什麼？
 它們都是 falsy (Boolean(undefined) // false, Boolean(null) // false)。
 
 你可以判斷一個變數是否為 undefined。
+
+
