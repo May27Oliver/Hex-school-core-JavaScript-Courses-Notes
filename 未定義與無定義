@@ -3,3 +3,23 @@ Not defined vs undefined
 not defined指沒有宣告，找不到記憶體空間
 
 undefined指有宣告但未給值。
+
+undefined 意思是變數沒有被宣告，或者是已經宣告了，但是沒有賦值。
+
+null 意思是「沒有值」的值。
+
+Javascript 將未賦值的變數的預設值設為 undefined。
+
+Javascript 從來不會將值設定為 null。這是讓開發者用來宣告 var 是沒有值的。
+
+undefined 不是一個有效的 JSON，而 null 是有效的。
+
+undefined 的類型（typeof） 是 undefined。
+
+null 的類型（typeof）是一個 object。為什麼？
+
+它們都是原始（primitives）型別。
+
+它們都是 falsy (Boolean(undefined) // false, Boolean(null) // false)。
+
+你可以判斷一個變數是否為 undefined。
