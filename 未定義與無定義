@@ -1,0 +1,5 @@
+Not defined vs undefined
+
+not defined指沒有宣告，找不到記憶體空間
+
+undefined指有宣告但未給值。
