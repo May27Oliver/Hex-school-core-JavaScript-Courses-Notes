@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<!-- IIFE全名為Immediately Invoked Functions Expressions
+指的是可以立即執行的Functions Expressions函式表示式，中文多譯為立即(執行)函式。 -->
+<script>
+var hello = function(name){
+	console.log('Hello ' + name);
+}();
+// 這種在函式背後直接加上()的函式便是IIFE立即執行函式
+//先宣告一個變數把函式帶進去為表達式的寫法，亦可不宣告而執行
+//印出Hello undefined，因為()裡沒給參數。
+
+(function(food){
+	console.log('大俠愛吃' + food)
+})('漢堡包');
+
+// 此種不宣告而執行的寫法必須在函式外加上()
+
+(function(food){
+	console.log('大俠愛吃' + food)
+}('漢堡包'));
+// 這種寫法也行。
+</script>
+</body>
+</html>
