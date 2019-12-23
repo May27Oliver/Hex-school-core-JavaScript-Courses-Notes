@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+運算子優先序(operator precedence)決定了運算子彼此之間被語法解析的方式，優先序較高的運算子會成為優先性較低的運算子的運算元
+*/ 
+/*
+左相依性(Left-associativity) 與右相依性(right-associativity)
+左相依性指運算方向由左至右，右相依性運算方向由右至左，賦值運算子是右相依性
+a = b = 5; //5先賦值給b，3賦予給b的回傳結果再賦值給a，並非b直接賦予給a 
+
+每個運算子都有優先性，從高(20)到低(1)
+
+運算子      優先性
+(...)        20
+.點語法      19
+...[...]     19
+new..(..)    19
+..(..)       19
+..=..        3    //賦值
+*/
+console.log(1<2<3);//1<2是true，型別轉換後是1，1<3又是true
+console.log(3>2>1);//3>2是true，別別轉換後是1，1>1是false
+
+/*
+"="賦值不管有沒有賦值成功都會回傳值
+*/
+var b = {};
+Object.defineProperty(b,'a',{
+    value: 2,
+    writable:false //不可再覆寫
+});
+Object.defineProperty(b,'b',{
+    value:3,
+    writable:false
+});
+//b.a = 3; //依舊是2，因為不可覆寫
+console.log(b);
+
+var a = 3;
+
+a = b.b =b.a = 1;
+console.log(a);//這裡會是1，因為儘管b.a不會被覆寫，但b.a=1依舊會回傳一個值1，由右到左自然就將1付給a了
+</script>
+</body>
+</html>
