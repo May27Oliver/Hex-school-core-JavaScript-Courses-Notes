@@ -8,13 +8,28 @@
 </head>
 <body>
     <script>
+        
         const a={index:0,sub:{message:'Hello World!'}};
         const b= Object.assign({},a);
-
-        b.index = 4;
-        b.sub.message = 'Hey Hey!';
+        
         console.log('a',a);
         console.log('b',b);
+        
+        b.index = 4;
+        b.sub.message = 'Hey Hey!';
+        /*
+        印出a 
+        {index: 0, sub: {…}}
+        index: 0
+        sub: {message: "Hey Hey!"}
+        __proto__: Object
+        03.html:15 b 
+        {index: 0, sub: {…}}
+        index: 4
+        sub: {message: "Hey Hey!"}
+        __proto__: Object 
+        由此可知b.index=4的表達式比console.log()先執行
+        */
     </script>
 </body>
 </html>
