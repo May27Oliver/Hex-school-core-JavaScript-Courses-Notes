@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+    原始型別有七種：
+    1.Boolean       布林
+    2.Null          空
+    3.Undefined     未定義
+    4.Number        數值
+    5.String        字串
+    6.BigInt(new)   整數值
+    7.Symbol(new)   Symbol
+    -->
+
+    <script>
+    var a,b,c,d;
+    console.log(typeof a);
+    a = 1;      //number
+    a = '文字'; //string
+    b = true;   //boolean
+    c = {};     //object
+    d = null;   //object
+    console.log(typeof d);
+
+    //原始型別
+    //物件型別
+
+    a = 'ming ';
+    console.log(a.length);
+    console.log(a.toUpperCase());
+    console.log(a.trim());//把字串後的空白鍵消除掉
+
+    var e = new String(a); //此處e的原始型別是物件不是字串，因為是建構式宣告
+    console.log(a,e);//此處e會印出string的包裹物件
+    /*
+    String
+    0: "m"
+    1: "i"
+    2: "n"
+    3: "g"
+    4: " "
+    length: 5
+    __proto__: String
+    length: 0
+    constructor: ƒ String()
+    anchor: ƒ anchor()
+    big: ƒ big()
+    blink: ƒ blink()
+    bold: ƒ bold()
+    charAt: ƒ charAt()
+    charCodeAt: ƒ charCodeAt()
+    codePointAt: ƒ codePointAt()
+    concat: ƒ concat()
+    endsWith: ƒ endsWith()
+    fontcolor: ƒ fontcolor()
+    fontsize: ƒ fontsize()
+    fixed: ƒ fixed()
+    includes: ƒ includes()
+    indexOf: ƒ indexOf()
+    italics: ƒ italics()
+    lastIndexOf: ƒ lastIndexOf()
+    link: ƒ link()
+    localeCompare: ƒ localeCompare()
+    match: ƒ match()
+    matchAll: ƒ matchAll()
+    normalize: ƒ normalize()
+    padEnd: ƒ padEnd()
+    padStart: ƒ padStart()
+    repeat: ƒ repeat()
+    replace: ƒ replace()
+    search: ƒ search()
+    slice: ƒ slice()
+    small: ƒ small()
+    split: ƒ split()
+    strike: ƒ strike()
+    sub: ƒ sub()
+    substr: ƒ substr()
+    substring: ƒ substring()
+    sup: ƒ sup()
+    startsWith: ƒ startsWith()
+    toString: ƒ toString()
+    trim: ƒ trim()
+    trimStart: ƒ trimStart()
+    trimLeft: ƒ trimStart()
+    trimEnd: ƒ trimEnd()
+    trimRight: ƒ trimEnd()
+    toLocaleLowerCase: ƒ toLocaleLowerCase()
+    toLocaleUpperCase: ƒ toLocaleUpperCase()
+    toLowerCase: ƒ toLowerCase()
+    toUpperCase: ƒ toUpperCase()
+    valueOf: ƒ valueOf()
+    Symbol(Symbol.iterator): ƒ [Symbol.iterator]()
+    __proto__: Object
+    [[PrimitiveValue]]: ""
+    [[PrimitiveValue]]: "ming "
+    */
+    </script>
+</body>
+</html>
