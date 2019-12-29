@@ -105,8 +105,9 @@
     var b = a;
     a.x = { x: 2};
     a.y = a = { y: 1};//此處a.y會指到舊路徑
-    console.log(a); // 結果？
-    console.log(b);
+    console.log(a); // y: 1
+    console.log(b); //x: {x: 2},y: {y: 1}
+
 </script>
 </body>
 </html>
