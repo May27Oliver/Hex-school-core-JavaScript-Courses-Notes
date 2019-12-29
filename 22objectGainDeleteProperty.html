@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+var family = {
+    name: '小明家',
+    deposit:1000,
+    members:{
+        mom:'老媽',
+        ming:'小明'
+    },
+    callFamily:function(){
+        console.log('聯絡小明家');
+    },
+    '1':'1',
+    '$-小明家':'$-小明家',
+};
+
+// 物件取值
+console.log(family.name);
+console.log(family.members.mom);
+
+var a = 'name';
+console.log(family[a]);
+
+// 物件取值的方式是透過點語法或是[]去抓屬性名稱，屬性名稱永遠是字串
+console.log(family[1]);
+// 既然是字串就可以用特殊字元，比方$#@
+
+//物件新增屬性
+family.dog = '小白';
+family['kitten'] = '小貓';
+family['$']='money';
+console.log(family);
+
+delete family.deposit; //刪除物件裡的屬性
+delete family['$'];
+
+console.log(window);
+//console.log(window)可以查看window物件有那些東西，很驚人有很多
+//當我們在全域宣告變數後，變數會寫入window物件變成其內的屬性
+var a = 1;
+b=2;
+/*上面兩者都會成為window的屬性，惟用變數宣告的屬性不能用delete刪掉，b則可以
+，因為其實他的宣告方式是這樣 window.b，window在全域是可以省略不寫的，
+既然是屬性的增加方式，則可以用delete刪去b*/
+</script>
+</body>
+</html>

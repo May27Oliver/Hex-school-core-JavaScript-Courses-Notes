@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var family = {
+        // property : value,
+        // property2 : value,
+        name: '小明家',
+        deposit: 1000,
+        members: {
+            mom: '老媽',
+            ming: '小明',
+        },
+        callFamily: function(){
+            console.log("聯絡小明家");
+        }
+    };//物件實字object literals
+
+    console.log(family);
+
+    var newFamily = new Object(family);
+    console.log(newFamily); 
+</script>
+</body>
+</html>

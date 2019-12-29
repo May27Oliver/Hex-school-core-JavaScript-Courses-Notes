@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var family = {};
+    var newString='小明家';
+    newString.name = '小明';
+    console.log(newString);
+    // 純值無法新增屬性
+
+    var newString2 = new String('小明家');
+    newString2.name = '小明';
+    console.log(newString2);
+    /*String {"小明家", name: "小明"}
+    0: "小"
+    1: "明"
+    2: "家"
+    name: "小明"
+    length: 3
+    __proto__: String
+    [[PrimitiveValue]]: "小明家"
+    new String所建立的字串不是純值，是物件，故可以新增屬性*/ 
+
+    function callName(){
+        console.log('呼叫小明');
+    }
+    callName.ming = "小明";
+    console.dir(callName);
+    //可以新增ming進function裡，代表function是物件，console.dir會顯示一個物件裡的所有屬性。
+</script>
+</body>
+</html>
