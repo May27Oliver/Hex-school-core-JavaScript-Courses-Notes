@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// 題一
+var a = 1;
+var b = 2;
+var c = 0;
+console.log(a && b && c); //a && b = 2，因為a=1為true，直接印b，b && c = 0，因為b為true，直接印c
+console.log(c || c && c || a); // ||和&&相較，&&優先性較高，優先執行(c && c) == 0，(c || a) ==1
+
+//題二
+console.log(1000 < 10000 < 10); //true < 10 === true;true會轉型成1
+console.log(1 < 10); // true;
+
+// 題三
+var a = '1';
+var b = 2;
+var c = (a > b) ? a * b : sum(a , b);
+
+function sum(a,b){ //函數陳述式有優先性
+    return a + b;
+}//"1"+2="12";
+</script>
+</body>
+</html>
