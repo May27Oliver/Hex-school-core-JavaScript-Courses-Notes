@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var p = "小明";
+    var p2= p;
+    p2 = '杰倫';
+    console.log(p);//小明
+    /*傳值過去，兩個變數便無干係*/ 
+
+    // var person = {
+    //     name:'小明',
+    // }
+    // var person2 = person;
+    // person2.name = '杰倫';
+    // console.log(person.name,person2.name);
+    /*傳參考過去，其中一個值改變了，另一個也會跟著改*/
+
+    // 值與參考
+    /*傳值call by value v.s. 傳參考call by reference*/ 
+    /*call by value:Boolean Null Undefined Number String*/
+    /*call by reference: 物件(陣列、函式)*/    
+
+    /*宣告物件時，帶入的是參考路徑而非值，是故定義person2=person時，傳入的是參考路徑而非值，所以共用了同一個物件*/
+    var person = {
+        name:'小明',
+    }
+    var person2 = {
+        name:'小明',
+    };
+    person2.name = '杰倫';
+    console.log(person.name,person2.name);
+    //這裡則是宣告了兩個物件，因此裡面各是兩個不同的參考路徑，不會互相影響。
+    //只要有{}就會宣告一個新的物件參考。
+
+    //callback hell
+    // var a = { x : 1};
+    // a.y = a;
+    // console.log(a);
+    /*此時印出：
+      a={
+          x:1,
+          y:{x:1,
+             y:{
+                 x:1,
+                 y:{
+                     x:1,
+                     y:{
+                         x:1,
+                         y:{
+                             x:1,
+                             y:{...}
+                         }
+                     }
+                 }
+             }
+            }
+      }*/
+
+    //   範例三
+    // var a = { x : 1};
+    // var b = a;
+    // a.y = a = { x : 2 };
+    // console.log(a.y);
+    // console.log(b);
+    /*
+    a.y={
+        x:2
+        y:{
+            x:2,
+            y:{
+                x:2
+                y:{
+                    x:2,
+                    y:{
+                        x:2,
+                        y:{
+                            x:2,
+                            y:{....}
+                        }
+                    }
+                }
+            }
+        }
+    }
+    b:{x:1}
+    我的答案，結果是錯的，正確答案如下：
+    1. a = { x : 2 }是一個運算式
+    2. a = a.y = { x : 2 } 同時執行
+    3. a.y會去找原本的路徑，因為同時執行他會指向a={ x : 1 }
+    但console.log(a.y)則會指向新的位置 a = { x : 2 }，這裡沒有a.y，在前一個參考位置裡。
+    b則會印出{
+        x:2
+        y:{...}
+    }
+    a===b.y
+    */ 
+    var a = { x: 1};
+    var b = a;
+    a.x = { x: 2};
+    a.y = a = { y: 1};//此處a.y會指到舊路徑
+    console.log(a); // 結果？
+    console.log(b);
+</script>
+</body>
+</html>
