@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    console.log(0 && 1); //如果&&前一個資料出現false值就會回傳第一個資料，如果第一個是真值，那他無論如何都會回傳第二個值
+    console.log(1 || 0); //只會回傳真值
+    console.log(0 || 1);
+    
+    //運用邏輯運算式
+    // var originCash = 500;
+    /*function updateEasyCard(cash){
+        console.log(cash);
+        var money = cash + originCash;
+        console.log('我有'+money+"元");
+    }
+
+    updateEasyCard();*/ 
+    //如果此處未傳參數進入，則cash會是undefined，undefined+600 自動型別轉換會顯示NaN
+    //Not a number
+    //如果要避免沒有寫參數呼叫函式的狀況，可以在function updateEasyCard(cash){}加上cash = cash || 500;
+    //如此一來若是想讓cash=0便無法了，因為會被判定為false而被500取代。
+
+    //以下為可以傳入0的方法
+    var originCash = 500;
+    function updateEasyCard(cash){
+        console.log(originCash);
+        var money = cash + originCash;
+        console.log("我有" + money + "元");       
+    }
+    updateEasyCard(0);
+    </script>
+</body>
+</html>
