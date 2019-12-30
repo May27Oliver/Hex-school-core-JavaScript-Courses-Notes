@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var family = {
+        name:'小明家',
+        members:{
+            father:'老爸',
+            mom: '老媽',
+            ming:'小明'
+        }
+    }
+
+    var newFamily = {};
+    for(var key in family){
+        console.log(key,family[key]);
+        newFamily[key] = family[key];
+    }
+    newFamily.name = '杰倫家';
+    console.log(family === newFamily);//false，儘管這裡已指向不同的記憶體空間
+    newFamily.members.ming = "大明";
+    console.log(family,newFamily);//但物件裡的物件依舊只傳到參考路徑
+    //淺層複製shallow copy 只複製到參考路徑而非賦值
+
+    //jQuery
+    var newFamily2=jQuery.extend({},family);
+    console.log("jQuery",newFamily2);
+    //es6
+    var newFamily3=Object.assign({},family);
+    console.log(newFamily3);
+    console.log("ES6",newFamily3);
+
+    //深層複製deepCopied，把family轉成JSON檔再轉回來，兩者就不相等了
+    console.log(family===JSON.parse(JSON.stringify(family)));
+    var newFamily4=JSON.parse(JSON.stringify(family));
+    newFamily4.name="杰倫家";
+    newFamily4.members.ming ='大明';
+    console.log(family,newFamily4);//物件裡的物件已不相連，兩者已無關係
+    </script>
+</body>
+</html>
