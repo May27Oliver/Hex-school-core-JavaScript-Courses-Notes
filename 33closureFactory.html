@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+function arrFunction1(){
+    var arr = [];
+    for(var i = 0; i < 3; i++){
+        arr.push(function(){
+            console.log(i);
+        });
+    }
+    console.log(arr);
+    return arr;
+}
+var fn = arrFunction1();
+fn[0]();
+fn[1]();
+fn[2]();
+/*這三個都印出3，閉包裏面的變數可以不斷修改，所以迴圈跑三圈後最終值是3
+，那如果想印出3個不同的數值怎麼辦呢？可以用IFEE，IFEE有限制作用域的功能
+*/
+//印出三個不同的數值的方法：
+//1.IFEE
+function arrFunction2(){
+    var arr = [];
+    for(var i = 0; i < 3; i++){
+        (function(j){
+            arr.push(function(){
+                console.log(j);
+            });
+        })(i);
+    }
+    console.log(arr);
+    return arr;
+}
+var fn = arrFunction2();
+fn[0]();
+fn[1]();
+fn[2]();
+
+//2.let
+function arrFunction3(){
+    var arr = [];
+    for(let i = 0; i < 3; i++){
+        arr.push(function(){
+            console.log(i);
+        });
+    }
+    console.log(arr);
+    return arr;
+}
+var fn = arrFunction3();
+fn[0]();
+fn[1]();
+fn[2]();
+
+// 3.函式工廠：利用閉包給定函式內變數初始值
+function storeMoney1(initValue){
+    var money = initValue || 1000;
+    return function (price){
+        money = money + price;
+        return money;
+    }
+}
+var MingMoney = storeMoney1(100);//給定money初始值100
+console.log(MingMoney(500));//給price值
+
+//4.私有方法：在函式裡回傳一個物件包，裡面有各式函式工具
+function storeMoney2(initValue){
+    var money = initValue || 1000;//給定初始值閉包函式
+    return {
+        increase:function (price){
+            money = money + price;
+            return money;
+        },
+        decrease:function (price){
+            money = money - price;
+            return money;
+        },
+        value:function (price){
+            return money;
+        },
+    }
+}
+var MingMoney = storeMoney2(100);//給定money初始值100
+MingMoney.increase(100);
+MingMoney.increase(100);
+MingMoney.increase(100);
+MingMoney.increase(100);
+MingMoney.decrease(100);
+console.log(MingMoney.value());
+//超好用要記得!!!
+</script>
+</body>
+</html>
