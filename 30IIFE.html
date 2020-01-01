@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // (function(){
+    //     console.log('立即函式');
+    //     //立刻執行
+    //     //就算是具名函式無法在函式外在次執行
+    // }());
+
+    // var x=1;
+    // (function(){
+    //     var Ming = '小明';
+    //     console.log(Ming);
+    //     //限制變數用途
+    //     x += 1;
+    //     return x;//但數值還是傳的到外面。
+    // })();
+    // console.log(x);
+    //這個立即函式外是抓不到Ming的，所以立即函式有用來限制作用域的功能
+
+    // var whereMing=(function (where){
+    //     console.log(where);
+    //     return where;
+    // })('小明在這');//要傳入的參數寫在外面的括號內
+    // console.log(whereMing);
+
+    // var a = {};
+    // (function(b){
+    //     b.person = '小明';
+    // })(a)
+    // ;(function(c){
+    //     console.log(c.person);
+    // })(a);
+    //以上是用立即函式來傳遞變數的方法
+
+    var a = {};
+    (function(global){
+        global.person = '小明';
+    })(window)//將全域傳入立即函式，常用於大型框架如Vue，這種方法可以可以確保框架可以正確掛載到全域環境上
+    ;(function(c){
+        console.log(person);
+    })();
+</script>
+</body>
+</html>

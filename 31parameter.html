@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+//多給參數的狀況、arguments、全域變數、this
+// var globalVariable = '全域變數';
+// var obj = {
+//     aFunction:function(para){//2.但函式只有一個參數值
+//         var localVariables='區域變數';
+//         console.log(para, localVariables, arguments,this,globalVariable);
+//         /*包含傳入的參數
+//         3.console.log印出'一段描述'，2,3省略，因為aFunction只有para一個參數值
+//         4.印出localVariable-->'區域變數'
+//         5.arguments 無論傳入多少參數都會傳進arguments
+//         6.this 誰呼叫函式就會指向誰，這裡是aFunction
+//         7.globalVariable 全域變數，來自於外層的變數
+//         */
+         
+//     }
+// }
+
+
+//參數其實就是函式裡的變數宣告
+// obj.aFunction('一段描述',2,3);//1.丟入三個參數
+// function callName(a){
+//     console.log(a);
+//     var a; //當一個變數本身就存在，再宣告一次是沒用的
+//     console.log(a);
+//     a = '杰倫';
+//     console.log(a);//杰倫，參數在()裡就已宣告，不用在區域內再宣告一次
+// }
+// callName('小明');
+
+// function callMore(d,c,b,a){//如果傳入參數數量不足，沒接到參數值的參數會呈現undefined
+//     console.log(d,c,b,a);
+// }
+// var a = 'a';
+// var b = 'b';
+// var c = 'c';
+// callMore(a,b,c);
+
+
+
+
+//將物件當作參數
+// function callObject(obj){//把物件當作參數傳入函式依舊是call by reference
+//     obj.name = '杰倫家'; //這裡去更改物件內容會影響到全域的那個物件
+// }
+// var family = {
+//     name:'小明家'
+// }
+// callObject(family);
+// console.log(family);
+
+
+//把函式當作參數丟進函式callback function
+// function callSomeone(name,a){
+//     console.log(name +'你好',a)
+// }
+// function functionB(fn){
+//     fn('小明',1);
+// }
+
+// functionB(callSomeone);
+
+function callArg(a){
+    console.log(a, arguments);
+    // arguments是類陣列，並無法使用陣列所有的方法
+    for(let index = 0;index<arguments.length;index++){
+        console.log(arguments[index]);
+    }
+}
+callArg(1,2,3,'4')
+</script>    
+</body>
+</html>
