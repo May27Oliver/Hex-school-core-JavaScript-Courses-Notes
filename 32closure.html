@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // function randomString(length){
+    //     var result = '';
+    //     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    //     var charactersLength = characters.length;
+    //     for(var i = 0; i < length; i++){
+    //         result += characters.charAt(Math.floor(Math.random()*charactersLength))
+    //     }
+    //     return result;
+    // }
+
+    
+    // function getData(){
+    //     var demoData = [];
+    //     for(let i = 0; i < 1000 ; i++){
+    //         demoData.push(randomString(1000))
+    //     }
+    //     setTimeout(function(){
+    //         demoData;
+    //     },10000);
+    // }
+    // getData();
+    /*函式內的變數記憶體空間在函式執行完畢後會被釋放掉*/
+    /*但如果子函式有參照父函式裡的變數，父函式裡的變數空間就不會被消掉*/
+    
+    function storeMoney(){
+        var money = 1000;
+        return function(price){
+            money = money + price;
+            return money;
+        }
+    }
+    console.log(storeMoney()(1000));//這裡storeMoney()內的var不會在函式結束後被削掉，因為有參照。
+    var MingMoney = storeMoney();
+    console.log("MingMoney: " + MingMoney(100));//因為記憶體空間不會被釋放，每呼叫一次MingMoney裡的money數值會不斷上升
+    console.log("MingMoney: " + MingMoney(100));
+    console.log("MingMoney: " + MingMoney(100));
+
+    var jayMoney = storeMoney();
+    console.log("jayMoney: " + jayMoney(1000));
+    console.log("jayMoney: " + jayMoney(1000));
+    console.log("jayMoney: " + jayMoney(1000));
+
+    /*MingMoney和jayMoney雖然都參照money，但使用的卻是不同的money的記憶體空間*/
+    </script>
+</body>
+</html>
