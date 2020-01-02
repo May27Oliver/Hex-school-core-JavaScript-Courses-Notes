@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var myName = '真心鎮大冒險';
+    function callName(){
+        console.log(this,this.myName);//目前this指向window
+    }
+    // callName();
+    /*this基本觀念：
+    -this在函式中不用特別宣告便會產生，this會指向一個可用的物件
+    -每個執行環境都有屬於自己的this
+    -this與函式如何宣告沒有關連性
+    -嚴格模式下簡易呼叫會有很大的改變
+    */
+
+
+    /*影響函式的this的調用方式
+    -作為物件方法(最常運用this的方法)
+    -簡易呼叫(絕大多數的呼叫方法)
+    -bind,apply,call方法
+    -new
+    -DOM事件處理器
+    -箭頭函式(ES6)
+    */
+
+    /*
+    this:物件的方法調用
+    -this與函式如何宣告沒有關連性
+    -物件的方法調用時，僅需要關注是在哪個物件下呼叫
+    object.fn()
+    fn()的this指向object
+    */
+
+    // var family = {
+    //     myName:'小明家',
+    //     callName:callName,
+    //     Ming:{
+    //         myName:'小明',
+    //         callName:callName
+    //     }
+    // }
+    // family.callName();
+    // family.Ming.callName();
+
+    //盡可能不要使用simple code的this
+    //IIFE
+    // (function(){
+    //     console.log(this.myName);//真心鎮大冒險
+    //     function callSomeone(){
+    //         console.log(this.myName);//真心鎮大冒險
+    //     }
+    //     callSomeone();//是simple code但並非全域呼叫之
+    // })();
+
+    // //閉包
+    // function easyCard(base){
+    //     var money = base;
+    //     var name = '悠遊卡';
+    //     return function(update){
+    //         money += update;
+    //         console.log(this.myName,money);
+    //     }
+    // }
+    // var MingEasyCard = easyCard(100);
+    // MingEasyCard(10);//這裡會變成'真心鎮大冒險 110'，沒有調用到閉包裡的'悠遊卡'
+
+    //callback function
+    // function myEasyCard(callback){
+    //     var money = 100;
+    //     return callback(money)
+    // }
+    // myEasyCard(function(money){
+    //     console.log(this.myName,money + 100)//依舊指向真心鎮
+    // });
+
+    // var a = [1,2,3];
+    // a.forEach(function(i){
+    //     console.log(this.myName,i);//依舊指向真心鎮
+    // });
+
+    // var family={
+    //     myName:'小明家',
+    //     callName:function(){
+    //         setTimeout(function(){//callback function依舊指向全域
+    //             console.log(this.myName);
+    //         },1000);
+    //     }
+    // }
+    // family.callName();
+
+    /*Q:如果我想在callback function裡指向物件內的變數，該怎麼做？
+    -可以在第一層function內宣告一個變數，將this指派進這個變數，再以這個變數的名稱去呼叫
+    
+
+    */
+    var family={
+        myName:'小明家',
+        callName:function(){
+            var self = this;
+            setTimeout(function(){//此時callback function能夠正確取到外層物件裡的變數。
+                console.log(self.myName);
+            },1000);
+        }
+    }
+    family.callName();
+</script>
+</body>
+</html>
