@@ -19,12 +19,13 @@
 // Dog.prototype.bark=function(){
 //     console.log(this.name + '吠叫');
 // }
+//盡量不要用建構函式來宣告function，會降低效能，建議如上用.prototype.函式名稱=function(){}的方式去宣告方法
 // console.log(Dog);
 // var Bibi = new Dog('比比','棕色','小');
 // console.log(Bibi);
 //Object > Dog > Bibi(實體)
 //如果要在Dog前面加一個新的層級animal
-//Object > animal > Dog 實體
+//Object > animal > Dog 實體>Bibi
 //Object > animal > Cat
 
 //Object.create() 這個方法可以把其他原型當作建構式使用
@@ -60,20 +61,35 @@ var Bibi = new Dog('比比','棕色','小型犬');
 console.log(Bibi);
 
 //新增一個貓科物件
-function Cat(name,color,size){
-    Animal.call(this,'貓科');
-    this.name = name;
-    this.color = color || '白色';
-    this.size = size || '小';
-}
-Cat.prototype = Object.create(Animal.prototype);
-Cat.prototype.constructor = Cat;
-Cat.prototype.bark = function(){
-    console.log(this.name + '喵喵');
-}
+// function Cat(name,color,size){
+//     Animal.call(this,'貓科');
+//     this.name = name;
+//     this.color = color || '白色';
+//     this.size = size || '小';
+// }
+// Cat.prototype = Object.create(Animal.prototype);
+// Cat.prototype.constructor = Cat;
+// Cat.prototype.bark = function(){
+//     console.log(this.name + '喵喵');
+// }
 
-var Kitty = new Cat('凱蒂','虎斑','小');
-console.log(Kitty);
+// var Kitty = new Cat('凱蒂','虎斑','小');
+// console.log(Kitty);
+
+/*原型鍊查找與constructor*/
+console.log(Bibi.__proto__===Dog.prototype);
+console.log(Bibi.__proto__.__proto__ === Animal.prototype);
+console.log(Bibi.__proto__.__proto__.constructor === Animal);
+console.log(Bibi.__proto__.__proto__.__proto__.__proto__===null);
+
+//為什麼函式可以使用prototype
+console.log(Dog.__proto__===Function.prototype);
+console.log(Animal.__proto__===Function.prototype);
+console.log(Object.__proto__===Function.prototype);
+
+console.log(Function.__proto__=== Function.prototype);
+console.log(Function.__proto__.__proto__=== Object.prototype);
+
 </script>
 </body>
 </html>
