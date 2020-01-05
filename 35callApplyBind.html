@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+var myName = '真心鎮大冒險';
+
+var family = {
+    myName:'小明家',
+}
+
+function fn(para1,para2){
+    console.log(this,para1,para2);
+}
+
+//call,apply,bind
+fn(1, 2);//這裡的this是window
+
+fn.call(family, 1, 2);//第一個參數帶入this要指向的對象
+fn.apply(family, [3, 4]);
+
+/*call和apply在調用參數時會立刻執行，但bind不會*/
+
+var fn2 = fn.bind(family,'小明','杰倫');
+fn2(1);//這個動作才會把參數都帶進fn()裡，此時如果在fn2裡加上參數會變成部分帶入參數時遞補上去的參數。
+
+//進階觀念
+fn.call(1,'小明','杰倫');//Number__proto__: Number[[PrimitiveValue]]: 1 "小明" "杰倫"
+/*this必定會指向物件，就算call()內的第一個參數值是數字或是字串，印出時必定也是以建構式的方式呈現，如Number()，String()*/
+fn.call('文字','小明','杰倫');
+fn.call(undefined,'小明','杰倫');/*null和undefined在非嚴格模式下變成參數丟進call裡會指向全域*/
+
+
+/*嚴格模式strict mode
+-加入'use strict'即可運作
+-並不會影響不支援嚴格模式的瀏覽器
+-可依據執行環境設定'use strict'，加在全域就會變成全域環境
+-透過拋出錯誤的方式消除一些安靜的錯誤
+-禁止使用一些有可能被未來版本ECMAScript定義的語法
+*/
+
+// (function(){
+//     'use strict';
+//     a = '小明';//有了嚴格模式這裡就會出錯
+// })();
+
+function callStrict(para1,para2){
+    'use strict';
+    console.log(this,typeof this, para1, para2);
+}
+
+callStrict.call(1,'小明','杰倫');//嚴格模式下call的第一個參數就不會被轉成物件，而會以原本的面貌呈現，就是number。
+callStrict.call(undefined,'小明','杰倫')//維持undefined
+callStrict('小明','杰倫');//簡易呼叫時this本質是undefined，嚴格模式下就會現形，是故simple call時盡量不要調用this
+
+</script>
+</body>
+</html>

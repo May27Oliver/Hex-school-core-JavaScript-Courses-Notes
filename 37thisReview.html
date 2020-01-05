@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+var value = 'global';
+var foo = {
+    value:'local',
+    bar: function(){
+        return this.value;
+    }
+}
+
+Object.defineProperty(b,'a',{
+    value:undefined,
+    writable:false
+});
+
+b.a = 'a';
+console.log(b.a);
+
+console.log(foo.bar());//local
+console.log((b.a = foo.bar)());//即便b物件不可被寫入，但表達式依舊會回傳值
+console.log((false || foo.bar)());
+</script>
+</body>
+</html>

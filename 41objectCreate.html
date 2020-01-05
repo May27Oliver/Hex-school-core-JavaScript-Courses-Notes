@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// var a = [];
+//Object > Array > a(實體)
+
+// function Dog(name, color, size){
+//     this.name = name;
+//     this.color = color;
+//     this.size = size;
+// }
+// Dog.prototype.bark=function(){
+//     console.log(this.name + '吠叫');
+// }
+// console.log(Dog);
+// var Bibi = new Dog('比比','棕色','小');
+// console.log(Bibi);
+//Object > Dog > Bibi(實體)
+//如果要在Dog前面加一個新的層級animal
+//Object > animal > Dog 實體
+//Object > animal > Cat
+
+//Object.create() 這個方法可以把其他原型當作建構式使用
+
+// var Pupu = Object.create(Bibi);
+// Pupu.name = '噗噗';//Pupu此時便繼承了Bibi的屬性與預設值，且可以修改屬性值
+// console.log(Pupu);
+
+
+
+/*建立一個animal的層級*/
+function Animal(family){
+    this.kingdom = '動物界';
+    this.family = family || '人科';
+}
+Animal.prototype.move = function(){
+    console.log(this.name + '移動');
+}
+
+function Dog(name,color,size){
+    Animal.call(this,'犬科'); //這裡要把animal的建構式帶進來才會讓Bibi有科目屬性
+    this.name = name;
+    this.color = color || '白色';
+    this.size = size || '小';
+}
+Dog.prototype = Object.create(Animal.prototype);//建立新的層級時也會把Dog的constructor覆蓋掉
+Dog.prototype.constructor = Dog; //把Dog的constructor建構回來
+Dog.prototype.bark = function(){
+    console.log(this.name + '吠叫');
+}
+
+var Bibi = new Dog('比比','棕色','小型犬');
+console.log(Bibi);
+
+//新增一個貓科物件
+function Cat(name,color,size){
+    Animal.call(this,'貓科');
+    this.name = name;
+    this.color = color || '白色';
+    this.size = size || '小';
+}
+Cat.prototype = Object.create(Animal.prototype);
+Cat.prototype.constructor = Cat;
+Cat.prototype.bark = function(){
+    console.log(this.name + '喵喵');
+}
+
+var Kitty = new Cat('凱蒂','虎斑','小');
+console.log(Kitty);
+</script>
+</body>
+</html>

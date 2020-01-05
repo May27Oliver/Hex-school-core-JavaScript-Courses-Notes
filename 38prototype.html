@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*
+原型鍊指的是物件實體、原型物件與原型物件間的繼承關係，如果在實體物件裡找不到某個屬性，便會向上往原型查找，直到找到這個原型鍊的底端。
+
+一個原型物件可以有多個實體物件。
+*/
+
+var a = [1,2,3];
+console.log(a,a[1],a.length);
+/*array裡會有很多內建方法沒有出現在陣列實自理，比方會印出forEach、length這些都是原型物件裡的方法
+既然原型的方法和屬性可以被取用，那麼也可以被新增。
+*/
+
+var b = [4,5,6];
+a.__proto__.getLast = function(){//透過點語法新增原型的屬性方法
+    return this[this.length-1];
+}
+
+console.log(a,b);
+console.log(a.getLast(),b.getLast());
+
+var family = {
+    name:'小明家',
+}
+
+family.__proto__.getName = function(){
+    return this.name;
+}
+
+console.log(family, family.getName());//陣列的原型是物件，是故在物件的原型新增方法，陣列也能調用。
+
+b.name = '陣列的屬性';
+console.log(b.getName());
+
+
+</script>
+</body>
+</html>

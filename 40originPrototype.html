@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var a = 'a';
+    console.log(a.toUpperCase());
+
+    var b = new String('b');
+    console.log(b);//這裡的String有個函式原型，可以搭配new做建構式用
+    console.dir(String);
+
+    String.prototype.lastText=function(){
+        return this[this.length-1];
+    }
+    console.log(b.lastText());
+
+    Number.prototype.secondPower = function(){
+        return this*this;
+    }
+    var num = 5;
+    console.log(num.secondPower());
+
+    var date = new Date();
+    console.dir(Date);
+    Date.prototype.getFullDate = function(){
+        var dd = String(this.getDate());
+        var mm = String(this.getMonth() + 1);
+        var yyyy = this.getFullYear();
+
+        var today = yyyy + '/' + mm + '/' +dd;
+        return today;
+    }
+    console.log(date.getFullDate());
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+// var Bibi = {
+//     name:'比比',
+//     color:'棕色',
+//     size:'小',
+//     bark:function(){
+//         console.log(this.name + '吠叫');
+//     }
+// }
+
+// var Pupu = {
+//     name:'噗噗',
+//     color:'白',
+//     size:'大',
+//     bark:function(){
+//         console.log(this.name + '吠叫');
+//     }
+// }
+
+
+/*建構函式，本身不是實體，如果要變成實體，就需new，new會開啟一個新的記憶體空間，然後連結到一個舊有的物件，舊物件裡的this就會綁定在新物件上
+*/
+function Dog(name,color,size){
+    this.name = name;
+    this.color = color;
+    this.size = size;
+}
+
+var Bibi=new Dog('比比','棕色','大型狗');
+console.log(Bibi);
+/*Dog
+name: "比比"
+color: "棕色"
+size: "大型狗"
+__proto__: Object*/
+
+var Pupu = new Dog('噗噗','白','小型狗');
+
+console.log(Bibi,Pupu);
+
+console.dir(Dog);
+/*
+ƒ Dog(name,color,size)
+length: 3
+name: "Dog"
+arguments: null
+caller: null
+prototype:
+constructor: ƒ Dog(name,color,size)
+__proto__: Object
+__proto__: ƒ ()
+[[FunctionLocation]]: 39defineProto.html:32
+[[Scopes]]: Scopes[1]
+
+prototype是原型裡的方法，可以透過prototype新增原型方法
+*/
+
+Dog.prototype.bark = function(){
+    console.log(this.name + '吠叫');
+}
+
+console.log(Bibi,Pupu);//此時兩隻狗都會有bark這個function了
+Bibi.bark();
+Pupu.bark();
+
+//__proto__ 物件上
+//prototype 函式上，在原型函式上新增方法建議都用prototype
+console.log()
+
+</script>
+</body>
+</html>

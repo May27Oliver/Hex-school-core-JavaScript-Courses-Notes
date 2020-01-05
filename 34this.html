@@ -100,16 +100,19 @@
     
 
     */
-    var family={
-        myName:'小明家',
-        callName:function(){
-            var self = this;
-            setTimeout(function(){//此時callback function能夠正確取到外層物件裡的變數。
-                console.log(self.myName);
-            },1000);
-        }
-    }
-    family.callName();
+    // var family={
+    //     myName:'小明家',
+    //     callName:function(){
+    //         var self = this;//這個做法限制了this的作用域
+    //         setTimeout(function(){//此時callback function能夠正確取到外層物件裡的變數。
+    //             console.log(self.myName);
+    //         },1000);
+    //     }
+    // }
+    // family.callName();
+
+    //'use strict'
+    
 </script>
 </body>
 </html>
