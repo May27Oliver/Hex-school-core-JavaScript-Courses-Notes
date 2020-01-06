@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var person = {
+        a:1,
+        b:2,
+        c:3
+    }
+
+    
+
+    // Object.defineProperty
+    //屬性、調整屬性的特徵
+    //1.值、2.可否寫入、3.可否被刪除、4.可否被列舉(可以限制列舉)
+
+    Object.defineProperty(person,'a', {
+        value: 4,
+        writable: false, 
+        configurable: true, //可否被刪除？
+        enumerable: true
+    })
+
+    person.a = 5;//不可寫入但不會顯錯
+
+    (function(){
+        'use strict';
+        person.a = 5;
+    })
+
+    // delete person.a;
+    delete person.b;
+    Object.defineProperty(person,'c',{
+        enumerable: true
+    });
+
+    for(var key in person){
+        console.log('列舉',key)
+    }
+
+    Object.defineProperty(person,'d',{
+        value:{},
+        writable:false
+    })
+
+    person.d = 6 ;//仍舊是空物件，但還是可以在物件裡新增東西，因為只是傳址
+    person.d.a=6;
+
+    // Object.defineProperties(person,{
+    //     a:{
+
+    //     },
+    //     b:{
+
+    //     }
+    // })
+    //一次可定義多屬性特徵
+
+    console.log(person);
+
+    
+
+</script>
+</body>
+</html>

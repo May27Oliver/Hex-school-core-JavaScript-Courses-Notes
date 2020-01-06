@@ -8,6 +8,7 @@
 </head>
 <body>
 <script>
+/*當函式被建立時，都會有個原型物件prototype，透過擴充這個prototype物件，就能讓每一個透過這個函式建構的物件都擁有這個屬性與方法*/
 // var a = [];
 //Object > Array > a(實體)
 
@@ -34,7 +35,7 @@
 // Pupu.name = '噗噗';//Pupu此時便繼承了Bibi的屬性與預設值，且可以修改屬性值
 // console.log(Pupu);
 
-
+/*透過new這個韓式建構出來的物件會有個[[prototype]]的隱藏屬性，會指向建構函式的prototype屬性，可以用Object.getPrototypeOf("被建構的物件")取得原型物件*/
 
 /*建立一個animal的層級*/
 function Animal(family){
@@ -67,7 +68,7 @@ console.log(Bibi);
 //     this.color = color || '白色';
 //     this.size = size || '小';
 // }
-// Cat.prototype = Object.create(Animal.prototype);
+// Cat.prototype = Object.create(Animal.prototype); //Object.create()裡面要丟進原型物件，Animal.prototype是原型物件，animal是constructor
 // Cat.prototype.constructor = Cat;
 // Cat.prototype.bark = function(){
 //     console.log(this.name + '喵喵');
