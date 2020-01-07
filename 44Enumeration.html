@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+function Person(){};
+Person.prototype.name = '人類';
+
+var casper = new Person();
+casper.a = undefined;
+console.log(casper);
+
+for(var key in casper){
+    console.log(key);
+}
+
+console.log(Object.getOwnPropertyDescriptor(casper.__proto__,'name'));
+console.log(Object.getOwnPropertyDescriptor(casper.__proto__.__proto__,'toString'));
+//原生原型不可被列舉enumerable==false，是故在for( in )裡不會出現
+
+</script>
+</body>
+</html>

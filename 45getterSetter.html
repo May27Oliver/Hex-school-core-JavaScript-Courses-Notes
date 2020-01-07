@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    var wallet = {
+        total:100,
+        // set save(price){
+        //     this.total = this.total + price / 2;
+        // },
+        // get save(){
+        //     return this.total / 2;
+        // }
+    }
+    //getter取得特定值得方法
+    //setter存值的方法
+    // wallet.save = 300;
+
+    Object.defineProperty(wallet,'save',{
+        set: function(price){
+            this.total = this.total + price / 2;
+        },
+        get: function(){
+            return this.total / 2;
+        }
+    })
+
+    console.log(wallet.save)
+    console.log(Object.getOwnPropertyDescriptor(wallet,'save'))
+
+    var a = [1,2,3];
+    Object.defineProperty(Array.prototype,'latest',{
+        get: function(){
+            return this[this.length-1];
+        }
+    })
+
+    console.log(a.latest);
+</script>
+</body>
+</html>
