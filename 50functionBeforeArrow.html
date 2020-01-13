@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<p>這裡具有一段話</p>
+<script>
+    //#沒有arguments 參數
+    //將以下改寫成arrow function並觀察差異
+    // const nums = function(){
+    //     console.log(arguments);
+    // }
+
+    // const nums = ()=>console.log(arguments);
+    //Uncaught ReferenceError: arguments is not definedS
+    
+    //在箭頭函式中使用區域參數即可替代arguments
+    // const nums =(...arg)=>console.log(arg);
+    // nums(10,50,100,50,5,1,1,1,500);
+
+
+    //#This 綁定的差異
+    //箭頭函式沒有自己的this，this會直接指向外層。
+    // var myName ='全域';
+    // var person = {
+    //     myName:'小明',
+    //     callName:()=>{
+    //         console.log('1',this.myName);
+    //         setTimeout(()=>{
+    //             console.log('2',this.myName);
+    //             console.log('3',this);
+    //         },10)
+    //     },
+    // }
+    // person.callName();//全都顯示全域
+    
+    // const ele = document.querySelector('p');
+    // ele.addEventListener('click',()=>{
+    //     console.log(this)//window
+    // });
+    
+    //也無法透過call,apply,bind重新給予this
+    // const family = {
+    //     myName:'小明家',
+    // }
+    // const fn = (para1,para2)=>{
+    //     console.log(this, para1, para2);
+    // }
+
+    // fn.call(family,'小明','杰倫');
+
+    const Fn = function (a){
+        this.name = a;
+    }
+    const ArrowFn = (a) =>{//箭頭函式沒有prototype無法作為建構函式使用
+        this.name=a;
+    }
+
+    console.log(Fn.prototype,ArrowFn.prototype);//constructor, undefined
+</script>
+</body>
+</html>

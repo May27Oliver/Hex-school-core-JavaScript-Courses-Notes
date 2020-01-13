@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+//關於ES6的新增語法
+//1.讓原有js撰寫更為直覺簡便。
+//2.讓js撰寫更直覺簡便
+
+//這是一段函式表達式
+// const callName = function(someone){
+//     return '我是' + someone;
+// }
+
+//箭頭函示：
+// const callName = (someone)=>{
+//     return '我是' + someone;
+// }
+
+//1.如果程式碼內容為表達式時可以縮寫，此處程式碼會自動return
+// const callName = (someone) => '我是'+someone;
+//2.如果只有一個參數時，可以把()去掉，如果沒有參數或是超過一個參數()不能省略
+// const callName = someone => '我是'+someone;
+const callName = ()=>'我是';
+
+
+console.log(callName('小明'));
+</script>
+</body>
+</html>

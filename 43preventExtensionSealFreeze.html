@@ -18,7 +18,8 @@ var person = {
 // //中文語意分別表示 防止擴充、封裝、凍結
 
 // //preventExtensions
-// //防止擴充
+//An object called by this method can't have any new properties being added.你不能在被preventExtension()的物件裡新增屬性
+//防止擴充
 // Object.preventExtensions(person);
 // console.log('是否可被擴充',Object.isExtensible(person));
 // console.log('person a 的屬性特徵',Object.getOwnPropertyDescriptor(person, 'a'));
@@ -46,6 +47,7 @@ console.log('person a 屬性特徵(嘗試修改後)',Object.getOwnPropertyDescri
 
 //seal
 //物件屬性無法新增刪除，也無法重新配置特徵(writable、configuable那些特徵)，但是可以調整目前屬性值
+// An object called by this method can not have any new properties being added or current properties deleted.
 // Object.seal(Person);
 // console.log('是否可被封裝',Object.isSealed(person));
 // console.log('person a 的屬性特徵',Object.getOwnPropertyDescriptor(person,'a'));
@@ -74,6 +76,7 @@ console.log('person a 屬性特徵(嘗試修改後)',Object.getOwnPropertyDescri
 
 //Freeze
 //物件屬性無法新增刪除，也無法重新配置特徵(writable、configuable那些特徵)，但是可以調整目前屬性值
+// An object called by this method can not have any further changes done to it.
 Object.freeze(person);
 console.log('是否可被凍結',Object.isFrozen(person));
 console.log('person a 的屬性特徵',Object.getOwnPropertyDescriptor(person,'a'));

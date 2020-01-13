@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+let Casper = '卡斯柏'; //可修改值，const宣告的變數則無法改變
+
+//var作用域是函式作用域，let是()裡的作用域
+
+// var Casper = '卡柏';
+
+// for(var i = 0; i<10;i++){ //這個i是全域變數
+//     console.log(i);
+// }
+
+// console.log(i);//10
+// for(let i=0;i<10;i++){
+//     console.log(i);
+// }
+
+
+// var answer = true;
+// if(answer){
+//     var myFeedback='同意';
+// }
+// console.log(myFeedback);
+// (function(){
+//     for(var i = 0; i<10;i++){ //這個i是區域變數
+//         console.log(i);
+//     }
+// })
+
+for(let i = 0;i<10;i++){
+    setTimeout(function(){
+        console.log('這執行第' + i + '次');
+    },10);
+}
+console.log(i);
+
+
+//const可以阻止該變數名稱的變數形成新的
+// const person = {
+//     name:'小明',
+//     money:500
+// }
+// person.name = '杰倫';
+
+// Object.freeze(person);
+// person.money = 1000;
+
+// person = {};
+
+
+//let hoisting
+// console.log(Ming);
+
+// let Ming = '小明';
+
+// {
+//     //創造
+//     let Ming; //暫時性死區TDZ，let會讓變數宣告時出現暫時性死區，在變數被賦值之前會無法被呼叫。
+//     //執行
+//     console.log(Ming);
+//     let Ming = '杰倫';
+// }
+//1.let一樣會有創造階段
+//2.但從創造到實際宣告的階段會出現TDZ，這個區域無法呼叫變數
+//3.有創造到執行的概念，但不會預先出現undefined而是出現錯誤提示
+//4.(文件不會表明這與var的Hoisting相同)
+
+// console.log(a);
+console.log(typeof a);
+console.log(typeof myName);//無法在初始化之前取得let所宣告的變數
+
+let myName = '';
+
+
+</script>
+</body>
+</html>

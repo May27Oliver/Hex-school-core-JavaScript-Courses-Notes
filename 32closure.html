@@ -53,6 +53,36 @@
     console.log("jayMoney: " + jayMoney(1000));
 
     /*MingMoney和jayMoney雖然都參照money，但使用的卻是不同的money的記憶體空間*/
+
+    //演算法書裡案例p.58
+    function Queue(){
+        var items= [];
+        this.enquenue = function(element){
+            items.push(element);
+        };
+        this.dequeue = function(){
+            return items.shift();
+        };
+        this.front = function(){
+            return items[0];
+        };
+        this.isEmpty = function(){
+            return items.length == 0;
+        };
+        this.clear - function(){
+            items = [];
+        };
+        this.size - function(){
+            return items.length;
+        };
+        this.print = function(){
+            console.log(items.toString());
+        };
+    };
+
+    var queue = new Queue();
+    console.log(queue);
+    console.log(queue.isEmpty());
     </script>
 </body>
 </html>
