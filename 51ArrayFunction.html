@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<script>
+    var people = [
+        {
+            name:'Casper',
+            like:'鍋燒意麵',
+            age:18
+        },
+        {
+            name:'Wang',
+            like:'炒麵',
+            age:24
+        },
+        {
+            name:'Bobo',
+            like:'蘿蔔泥',
+            age:1
+        },
+        {
+            name:'滷蛋',
+            like:'蘿蔔泥',
+            age:3
+        }
+    ];
+
+    //filter()回傳一個陣列，條件是return後方為true的物件，適合用在搜尋符合的條件
+    var filterEmpty = people.filter(function(item,index,array){
+        //空的
+    });
+
+    console.log("filterEmpty");//沒有條件會回傳空陣列
+    console.log(filterEmpty);
+
+    var filterAgeThan5 = people.filter(function(item,index,array){
+        return item.age>5;//取得大於五歲的
+    });
+    console.log("filterAgeThan5: ");
+    console.log(filterAgeThan5);
+
+    var filterDouble = people.filter(function(item,index,array){
+        return index % 2 === 1 ;//索引值為基數的值
+    });
+    console.log("filterDouble: ");
+    console.log(filterDouble);
+
+
+
+
+
+    //find()，跟filter()很像，但find()只會回傳一次值，且是第一次為true的值。
+    var findEmpty = people.find(function(item,index,array){
+        //沒有條件是空值
+    });
+    console.log("findEmpty: ");
+    console.log(findEmpty)
+
+    var findAgeThan5 = people.find(function(item,index,array){
+        return item.age >5;
+    });
+    console.log("findAgeThan5: "); //雖然答案只有兩個但只會回傳Casper一個物件
+    console.log(findAgeThan5); 
+    var findLike = people.find(function(item,index,array){
+        return item.like ==="蘿蔔泥"; //取得陣列Like ==== '蘿蔔泥'
+    });
+    console.log("findLike： ")
+    console.log(findLike); //雖然答案只有兩個，但只會回傳第一個Bobo物件。
+
+
+
+
+
+    //forEach()不會額外回傳值，只單純執行每個陣列內的物件或值
+
+    var forEachIt = people.forEach(function(item, index, array){
+        console.log("forEachIt: ");
+        console.log(item,index,array); //物件、索引、全部陣列
+        return item;                   // forEach 沒在return的，所以這邊寫了沒用
+    });
+    console.log(forEachIt); //undefined
+
+    people.forEach(function(item,index,array){
+        item.age = item.age + 1;    //forEach就如同for，不過寫法更容易
+    });
+    console.log("people:"); 
+    console.log(people);  //全部age + 1
+
+
+
+
+
+
+
+    //map()，使用map()需要回傳一個值，它會透過函式內所回傳的值組成一個陣列。
+    //如果不回傳則是undefined
+    //回傳數量等於原始陣列的長度。
+    //很適合將原始的變數運算後重新組成一個陣列。
+    var mapEmpty = people.map(function(item,index,array){
+    });
+    console.log("mapEmpty:");
+    console.log(mapEmpty); //[undefined, undefined, undefined, undefined]
+
+    var mapAgeThan5 = people.map(function(item, index, array){
+        return item.age > 5; //比較大於五歲的
+    });
+    console.log("mapAgeThan5:");
+    console.log(mapAgeThan5); //[true,true,false,false]
+
+    var mapAgeThan5_2 = people.map(function(item,index,array){
+        //錯誤示範
+        if(item.age>5){
+            return item;    //回傳大於五歲的
+        }
+        return false;   //別以為空的或是false就不會回傳
+    });
+    console.log("mapAgeThan5_2:");
+    console.log(mapAgeThan5_2); //[{name:'Casper'....},{name:'Wang'....},false, false]
+
+    var mapEat = people.map(function(item, index, array){
+        if(item.like!=='蘿蔔泥'){
+            return `${item.like}好吃`;
+        }else{
+            return `${item.like}不好吃`;
+        }
+    });
+    console.log("mapEat:");
+    console.log(mapEat);
+
+
+
+
+
+    var array = [
+        {
+            name:'Casper',
+            like:'鍋燒意麵',
+            age:18
+        },
+        {
+            name:'Wang',
+            like:'炒麵',
+            age:24
+        },
+        {
+            name:'Bobo',
+            like:'蘿蔔泥',
+            age:1
+        },
+        {
+            name:'滷蛋',
+            like:'蘿蔔泥',
+            age:3
+        }
+    ]
+
+    //every()，可以檢查所有的陣列是否符合條件，這個函式只會回傳true或false，可以用來檢查陣列中的內容是否符合條件。
+    var ans = array.every(function(item,index,array){
+        console.log(item,index,array);//物件，索引，全部陣列
+        return item.age > 10//當全部age大於10才能回傳true
+    });
+    console.log("ans:");
+    console.log(ans); //false:只要有部分不符合，則為false
+
+    var ans2 = array.every(function(item,index,array){
+        return item.age < 25
+    });
+    console.log("ans2:");
+    console.log(ans2); //true:全部age都小於25
+
+
+    //some()，和every()很接近，都是回傳true or false，差異僅在every()需要完全符合，some()僅需要部份符合就有true。
+    var ans = people.some(function(item, index, array){
+        return item.age > 10 //當全部age > 10才回傳true
+    });
+    console.log(ans);
+
+    var ans2 = people.some(function(item,index,array){
+        return item.age < 25;
+    });
+    console.log(ans2);  // true:只要有部分符合，則為true
+
+    var ans2 = people.some(function(item, index, array){
+        return item.age > 25
+    });
+    console.log(ans2); //false:全部不符合則為false
+
+
+    //reduce()，可以與前一個回傳值做運算後再回傳
+    var reduceEmpty = people.reduce(function(accumulator, currentValue, currentIndex, array){
+    });
+    console.log(reduceEmpty);                 // 沒有條件，會是 undefined
+
+    var reducePlus = people.reduce(function(accumulator, currentValue, currentIndex, array){
+    // 分別為前一個回傳值, 目前值, 當前索引值
+    console.log(accumulator, currentValue, currentIndex);
+    return accumulator + currentValue.age;  // 與前一個值相加
+    }, 0);                                    // 傳入初始化值為 0
+    console.log(reducePlus);                  // 總和為 46
+
+    var reducePlus = people.reduce(function(accumulator, currentValue, currentIndex, array){
+    console.log('reduce', accumulator, currentValue, currentIndex)
+    return Math.max( accumulator, currentValue.age ); // 與前一個值比較哪個大
+    }, 0);
+    console.log(reducePlus);                  // 最大值為 24
+</script>
+</body>
+</html>
