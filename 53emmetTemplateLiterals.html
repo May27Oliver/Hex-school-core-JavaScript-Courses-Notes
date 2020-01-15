@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="list"></div>
+<script>
+/*"emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "vue-html": "html",
+    "plaintext": "jade"
+
+    在setting內加上這段就可以在``裡用emmet
+},*/ 
+const people =[
+    {
+        name:'小明',
+        cash:1000,
+    },
+    {
+        name:'莉法',
+        cash:1000,
+    },
+    {
+        name:'桐人',
+        cash:1000,
+    },
+    {
+        name:'雅絲娜',
+        cash:1000,
+    }
+] 
+    
+// const sentence =`我是${person.name}，身上帶有${((c)=>c*2)(person.cash)}元`
+// const sentence =`我是${person.name}，${`身上帶有${person.cash}`}元`
+//${}內部不可用const，因為const宣告不是表達式
+//${}內部可再增加${}做巢狀
+//join()可把陣列中間的逗號取消
+const listString = `<ul>
+    ${people.map((people)=>`<li>我是${people.name}，身上有${people.cash}元</li>`).join('')}
+    </ul>`
+console.log(listString);
+document.querySelector('#list').innerHTML=listString;
+</script>
+</body>
+
+</html>
