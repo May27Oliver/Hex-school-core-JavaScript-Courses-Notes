@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="message"></div>
+<script>
+// function showConsole(strings,arg1){
+//     console.log(strings,arg1)
+// }
+// const myName = '小明';
+// const highlight = (strings,...arg)=>
+//     strings.map((str,i)=>`${str}`).join('');
+// const sentence = highlight`您好${myName}，餐點已經準備好囉！`;
+// console.log(sentence);
+
+//直接把樣板字面值函式後面，無須加上括號，即可。
+//用樣板字面值傳入標籤函式，會輸出array
+//標籤函式第一個參數是陣列內容，第二個參數是索引。
+
+// const myName = '小明';
+// const highlight = (strings,...arg)=>
+//     strings.map((str,i)=>`${str}${arg[i]?`<span>${arg[i]}</span>`:''}`).join('');
+// const sentence = highlight`您好${myName}，餐點已經準備好囉！`;
+// console.log(sentence);
+
+const messageName = '小明';
+document.querySelector('#message').innerHTML = convertHTML`<p>${messageName}傳來一則訊息</p>`
+//直接用樣板字面值讓用戶輸入資料更改html可能遭到xss攻擊，解法如下
+
+function convertHTML(strings,...keys){
+    return strings.map((str,i)=>
+        `${str}${keys[i]?`${keys[i]
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')}`:''}`
+    ).join('');
+}
+
+//將convertHTML放到樣板字面值前就會將html標籤無效化
+</script>
+</body>
+</html>
