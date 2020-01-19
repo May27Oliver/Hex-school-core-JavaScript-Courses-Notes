@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   <div class='message'></div>
+    <script>
+    var xhr = new XMLHttpRequest();
+
+    //readyState
+    //0-你已經產生一個XMLHttpRequest，但還沒有連結你要撈的資料
+    //1-你用了open()，但你還沒有把資料傳過去。
+    //2-偵測到你有用send()。
+    //3-loading中。
+    //4-你撈到資料了，數據已經完全接收到了。
+    //格式、要讀取的網址、同步與非同步
+    //格式：get(讀取資料)、post(傳送資料到伺服器)
+    xhr.open('get','https://bsb.kh.edu.tw/afterschool/opendata/afterschool_json.jsp?city=24',true);
+    xhr.send(null);
+
+    //true 非同步，不會等資料傳回就會讓程式繼續往下跑，等到回傳才會自動回傳
+    console.log(xhr.responseText);//因為一開始跑太快，非同步不等回傳就執行這行程式，所以裡面什麼都撈不到
+    
+    //onload：等到事件完成資料回傳時才執行這段程式
+    xhr.onload = function(){
+       var str = JSON.parse(xhr.responseText);
+       console.log(str);
+       document.querySelector(".message").innerText=str[0].name;
+    }
+
+    //AJAX步驟：
+    /*
+    1.建立了一個XMLhttpRequest
+    2.傳送到對方伺服器要資料
+    3.回傳資料到自己的瀏覽器
+    4.拿到資料後再看要怎麼處理
+    */
+
+    //CORS跨網頁撈取資料
+    /*
+    如果CORS沒有開，會出現Access-Control-Allow-Origin的錯誤，要開CORS應該要由SERVER端去開
+    可以透過test-cors.org這個網站去測試看你要串的API網站是否有開CORS
+    如果你想開啟跨來源 HTTP 請求的話，Server 必須在 Response 的 Header 裡面加上Access-Control-Allow-Origin。
+    */
+    </script>
+</body>
+</html>
