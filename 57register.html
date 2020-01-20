@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="57register.html">
+        帳號：
+        <input type="text" id='account' name='account'>
+        密碼：
+        <input type="password" id='password' name='password'>
+        <input type="submit" id='submit'>
+    </form>
+    <div id="idMsg"></div>
+<script>
+    function register(){
+        let xhr =new XMLHttpRequest();
+        xhr.onload=function(){
+            if(xhr.status==200){
+                console.log(xhr.responseText);
+                document.getElementById('idMsg').innerText=JSON.parse(xhr.responseText);
+            }else{
+                document.getElementById('idMsg').innerText=xhr.status;
+            }
+        }
+
+        let query_strings = `email=${document.getElementById('account').value}&password=${document.getElementById('password').value}`
+        let url='https://hexschool-tutorial.herokuapp.com/api/signup';
+        xhr.open('post',url,true);
+        xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+        //告知伺服器現在要傳送的東西是什麼格式
+        xhr.send(query_strings);
+    }
+    
+    window.addEventListener('load',function(){
+        document.getElementById('submit').addEventListener('click',register,true);
+    },true);
+</script>
+</body>
+</html>

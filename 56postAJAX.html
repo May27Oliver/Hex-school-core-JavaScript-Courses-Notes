@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="56postAJAX.html">
+    帳號:
+    <input type="text" name='account' id='account'>
+    <br>
+    密碼:
+    <input type="password" name='password' id='password'>
+    <br>
+    <input type="submit" value='送出' id='submit'>    
+</form>
+<div id='idMsg'></div>
+<script>
+    function checkId(){
+        let xhr = new XMLHttpRequest();
+        if(xhr.status===200){
+            document.getElementById('idMsg').innerText=xhr.responseText;
+        }else{
+            document.getElementById('idMsg').innerText=xhr.status;
+        }
+
+        let url = 'https://hexschool-tutorial.herokuapp.com/api/signup';
+        let query_strings = `account=${document.getElementById('account').value} & password=${document.getElementById('password').value}`
+        xhr.open('post',url,true);
+        xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');
+        xhr.send(query_strings);
+    };
+
+    window.addEventListener('load',function(){
+        document.getElementById('submit').addEventListener('click',checkId,false);
+    },true);
+
+</script>
+</body>
+</html>
