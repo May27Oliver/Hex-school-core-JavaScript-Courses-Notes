@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+//定義兩個script標籤，一個引用遠方API，另一個設定方法，引用API回傳的數據
+function getData(data){
+    console.log(data);
+}
+//可以透過前端Get傳遞向後端告訴後端去生成像jsonp.js裡getData()這樣的腳本文件
+var script = document.createElement('script');
+script.id = 'jsonp';
+script.src = './jsonp.js';
+document.body.appendChild(script);
+</script>
+</body>
+</html>
