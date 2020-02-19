@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!-- Promise  URL:https://wcc723.github.io/development/2020/02/16/all-new-promise/?fbclid=IwAR3Bi2QdyKGPQf1p18rTvsmoP9Fyrtpea3HENzOoqhhGXvIKfjybFHjfc5E-->
+<!--
+Ajax 是屬於一個透過 JavaScript 技術名稱，用於取得遠端資料；而 Promise 則是一個語法，專門用來處理非同步行為，並不是專門用來處理 Ajax 使用，所以兩者是不同的。
+
+Promise 本身是用來改善 JavaScript 非同步的語法結構。
+
+JavaScript 是屬於同步的程式語言，因此一次僅能做一件事情，但遇到非同步的事件時，就會將非同步的事件移動到程式碼的最後方，等到所有的原始碼運行完以後才會執行非同步的事件。
+
+以下列的程式碼來說，在 console 中依序的會出現的順序為：
+
+1.開始
+2.程式碼結束
+3.非同步事件 <- 最後執行
+ -->
+<script>
+    // const funcA=function(){
+    //     var i = Math.random()+1;
+    //     window.setTimeout(function(){
+    //         console.log('function A');
+    //     },i*1000);
+    // };
+
+    // const funcB=function(){
+    //     var i = Math.random()+1;
+    //     window.setTimeout(function(){
+    //         console.log('function B');
+    //     },i*1000);
+    // };
+
+    // funcA();
+    // funcB();
+/*因為setTimeout是非同步事件，無法確認funcA或funcB誰會先執行，
+如果要確保執行的順序，會需要透過Callback function來處理*/ 
+
+    /*const funcA=function(callback){
+        var i = Math.random()+1;
+        window.setTimeout(function(){
+            console.log('function A');
+        
+        if(typeof callback==='function'){
+                    callback();
+                }
+
+        },i*1000);
+    };
+
+    const funcB=function(){
+        var i = Math.random()+1;
+        window.setTimeout(function(){
+            console.log('function B');
+        },i*1000);
+    };
+
+    funcA( funcB );*/
+
+/*但如果函式之間相依過身，callback多層之後會產生波動拳，是故可用promise解決這個問題*/
+
+/*    promise物件     */ 
+/*const myFirstPromise=new Promise((resolve,reject)=>{
+    resolve(someValue);         //完成
+    reject("failure reason");   //拒絕
+});
+
+function myAsynFunction(url){
+    return new Promise((resolve,reject)=>{
+        // resolve() or reject()
+    });
+};
+
+const p = new Promise();
+
+p.then();    // Promise 回傳正確
+p.catch();   // Promise 回傳失敗
+p.finally(); // 非同步執行完畢（無論是否正確完成）
+*/
+
+/*Promise 建構函式建立同時，必須傳入一個函式作為參數（executor function），
+此函式的參數包含 resolve, reject，這兩個方法分別代表成功與失敗的回傳結果，
+特別注意這兩個僅能回傳其中之一，回傳後表示此 Promise 事件結束。*/
+
+/*上面三個function的非同步，用promise來寫*/
+// function funcA(){
+//     return new Promise(function(resolve,reject){
+//         window.setTimeout(function(){
+//             console.log('A');
+//             resolve('A');
+//         },(Math.random()+1)*1000);
+//     });
+// }
+
+// function funcB(){
+//     return new Promise(function(resolve,reject){
+//         window.setTimeout(function(){
+//             console.log('B');
+//             resolve('B');
+//         },(Math.random()+1)*1000);
+//     });
+// }
+
+// function funcC(){
+//     return new Promise(function(resolve,reject){
+//         window.setTimeout(function(){
+//             console.log('C');
+//             resolve('C');
+//         },(Math.random()+1)*1000);
+//     });
+// }
+
+// funcA()
+//     .then(funcB)
+//     .then(funcC);
+
+/*resolve和reject就是callback function的概念*/
+
+// function promise() {
+//   return new Promise((resolve, reject) => {});
+// }
+
+// console.dir(promise());
+
+/*在 Promise 的執行函式中，可以看到以下兩個屬性：
+
+[[PromiseStatus]]: "pending" -> 表示目前的進度狀態
+[[PromiseValue]]: undefined -> 表示 resolve 或 reject 回傳的值
+*/
+
+// function promise() {
+//   return new Promise((resolve, reject) => {reject('失敗');});
+// }
+
+// console.dir(promise());
+/*由於上列promise(){}收到reject("失敗");
+[PromiseValue]]:"失敗，之後執行catch，如果有catch的話"
+console.dir()會仔細把物件內容攤開給你看。
+*/
+function myPromise(){
+    return new Promise((resolve,reject)=>{
+        const num = Math.random() > 0.5 ? 1 : 0;
+
+        console.log(num);
+
+        if(num){
+            resolve("成功");
+        }else{
+        reject("失敗");
+        }
+    });
+}
+
+console.dir(myPromise());
+
+/*在呼叫前 Promise 前回顧一下 Promise 會有三個狀態：
+
+Pending -> 尚未得到結果
+Resolved：事件已經執行完畢且成功操作，回傳 resolve 的結果
+Rejected：事件已經執行完畢但操作失敗，回傳 rejected 的結果
+上列的三種狀態每次執行必定會經過 Pending，接下來進入 Fulfilled 或 Rejected 的其中之一，並且可以使用 then() 及 catch() 取得成功或失敗的結果。
+
+在 .then(onFulfilled, onRejected)中可帶入兩個回呼函式，兩者分別又可以帶入各自的參數：
+
+onFulfilled：執行成功的函式，所帶入參數表示 Promise 函式中 resolve 所帶入的值。
+onRejected：執行失敗的函式，帶入參數表示 Promise 函式中 reject 所帶入的值。
+*/ 
+
+/*promise.then(onFulfilled,onRejected);
+前者為resolve的callback，後者為reject
+*/
+
+promise()
+    .then((success)=>{
+        console.log(success);
+    },(fail)=>{
+        console.log(fail);
+    })
+/*
+在大部分情況下，開發者習慣僅使用 .then() 來取得成功的結果，失敗的部分交由 catch(onRejected) 來處理，這兩種寫法差異很小。
+*/
+promise()
+    .then(success=>{
+        console.log(success);
+    })
+    .catch(fail =>{ //失敗的行為一律交給catch
+        console.log(fail);
+    });
+
+/*
+Promise 另一個特點在於 then、catch 都可以使用鏈接的方式不斷的進行
+下一個任務，在此範例中我們修改 Promise 的結果，改成傳入 0 則會調用
+ reject，其它數值則會調用 resolve。
+*/
+
+function promise(num){
+    return new Promise((resolve,reject)=>{
+        num ? resolve(`${num},成功`) : reject('失敗');
+    });
+}
+/*
+接下來，當我們要進行確保 Promise 任務結束後在進行下一個任務時，就可以使用 return 的方式進入下一個 then，此 return 也有以下特點：
+
+方法不限於 promise 函式，任何表達式（expression）都可進行回傳
+如果是 promise 函式，則會繼續遵循 then 及 catch 的運作
+如果不是 promise 函式，在下一個 then 則可以取得結果
+*/
+
+promise(1)
+    .then(success=>{
+        console.log(success);
+        return promise(2);
+    })
+    .then(success =>{
+        console.log(success);
+        return promise(0);// 這裡被拒絕，會進入catch
+    })
+    .then(success=>{    //由於上一個階段結果是reject，所以此段不執行
+        console.log(success);
+        return promise(3);
+    })
+    .catch(fail => {
+        console.log(fail);
+    })
+
+/*
+Then VS Catch 的失敗回呼差異
+then、catch 都可以透過進行鏈接，上述也有提到 then 同時也能接收失敗的結果，在此用圖示表示兩者在執行上不同的結果。
+
+不使用 then 接收失敗：無論在哪一個階段遇到 reject 時，接下來會直接跳到
+ catch，在其後的 then 都不會執行。另外提一下：catch 依然可以使用 return
+  繼續串接（實戰中很少這樣寫），詳見下圖。
+*/
+
+/*
+Finally 完成
+最後方可以使用 finally 來確認工作結束，finally 
+不帶有任何參數。這個方法適合用來作為 Ajax 已經讀取完成
+，透過 finally 來關閉讀取的效果。
+*/
+promise(1)
+    .then(success=>{
+        console.log(success);
+    }).finally(()=>{
+        console.log('done');
+    })
+</script>
+
+</body>
+</html>

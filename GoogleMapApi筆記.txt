@@ -1,0 +1,15 @@
+google map 是由無數張png和jpg圖磚合成起來，用經緯度座標
+
+leafLet(js 框架-常見處理)
+圖資(地圖資料)
+openStreetMap
+標示點(marker)
+
+openStreetMap(圖資-地圖資料)
+Google Map（評價好，要錢）
+Safari Map 垃圾
+OpenStreetMap(開源免費)
+圖資
+
+Leaftlet官網
+https://leafletjs.com/examples/quick-start/
