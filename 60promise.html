@@ -141,7 +141,7 @@ p.finally(); // 非同步執行完畢（無論是否正確完成）
 [PromiseValue]]:"失敗，之後執行catch，如果有catch的話"
 console.dir()會仔細把物件內容攤開給你看。
 */
-function myPromise(){
+function promise(){
     return new Promise((resolve,reject)=>{
         const num = Math.random() > 0.5 ? 1 : 0;
 
@@ -154,8 +154,6 @@ function myPromise(){
         }
     });
 }
-
-console.dir(myPromise());
 
 /*在呼叫前 Promise 前回顧一下 Promise 會有三個狀態：
 
@@ -212,7 +210,7 @@ function promise(num){
 
 promise(1)
     .then(success=>{
-        console.log(success);
+        console.log(success);/*success作為參數丟進來就是把promise內resolve()內的參數傳入，這裡就是${num}成功*/
         return promise(2);
     })
     .then(success =>{
@@ -248,6 +246,31 @@ promise(1)
     }).finally(()=>{
         console.log('done');
     })
+
+/*promise with AJAX*/
+let url='https://jsonplaceholder.typicode.com/todos/1';
+
+function get(urlAddress){
+    return new Promise((resolve,reject)=>{
+        var xhr=new XMLHttpRequest();
+
+        xhr.open('GET',url);
+        xhr.onload=function(){
+            if(xhr.status===200){
+                resolve(JSON.parse(xhr.response));
+            }else{
+                reject(xhr.status);
+            }
+        };
+        xhr.send();
+    });
+}
+
+get(url)
+    .then(res=>console.log(res))
+    .catch(res=>console.error(res));
+
+
 </script>
 
 </body>
