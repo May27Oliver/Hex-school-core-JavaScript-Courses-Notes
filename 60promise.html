@@ -141,19 +141,19 @@ p.finally(); // 非同步執行完畢（無論是否正確完成）
 [PromiseValue]]:"失敗，之後執行catch，如果有catch的話"
 console.dir()會仔細把物件內容攤開給你看。
 */
-function promise(){
-    return new Promise((resolve,reject)=>{
-        const num = Math.random() > 0.5 ? 1 : 0;
+// function promise(){
+//     return new Promise((resolve,reject)=>{
+//         const num = Math.random() > 0.5 ? 1 : 0;
 
-        console.log(num);
+//         console.log(num);
 
-        if(num){
-            resolve("成功");
-        }else{
-        reject("失敗");
-        }
-    });
-}
+//         if(num){
+//             resolve("成功");
+//         }else{
+//         reject("失敗");
+//         }
+//     });
+// }
 
 /*在呼叫前 Promise 前回顧一下 Promise 會有三個狀態：
 
@@ -172,22 +172,22 @@ onRejected：執行失敗的函式，帶入參數表示 Promise 函式中 reject
 前者為resolve的callback，後者為reject
 */
 
-promise()
-    .then((success)=>{
-        console.log(success);
-    },(fail)=>{
-        console.log(fail);
-    })
+// promise()
+//     .then((success)=>{
+//         console.log(success);
+//     },(fail)=>{
+//         console.log(fail);
+//     })
 /*
 在大部分情況下，開發者習慣僅使用 .then() 來取得成功的結果，失敗的部分交由 catch(onRejected) 來處理，這兩種寫法差異很小。
 */
-promise()
-    .then(success=>{
-        console.log(success);
-    })
-    .catch(fail =>{ //失敗的行為一律交給catch
-        console.log(fail);
-    });
+// promise()
+//     .then(success=>{
+//         console.log(success);
+//     })
+//     .catch(fail =>{ //失敗的行為一律交給catch
+//         console.log(fail);
+//     });
 
 /*
 Promise 另一個特點在於 then、catch 都可以使用鏈接的方式不斷的進行
@@ -195,11 +195,11 @@ Promise 另一個特點在於 then、catch 都可以使用鏈接的方式不斷�
  reject，其它數值則會調用 resolve。
 */
 
-function promise(num){
-    return new Promise((resolve,reject)=>{
-        num ? resolve(`${num},成功`) : reject('失敗');
-    });
-}
+// function promise(num){
+//     return new Promise((resolve,reject)=>{
+//         num ? resolve(`${num},成功`) : reject('失敗');
+//     });
+// }
 /*
 接下來，當我們要進行確保 Promise 任務結束後在進行下一個任務時，就可以使用 return 的方式進入下一個 then，此 return 也有以下特點：
 
@@ -208,22 +208,22 @@ function promise(num){
 如果不是 promise 函式，在下一個 then 則可以取得結果
 */
 
-promise(1)
-    .then(success=>{
-        console.log(success);/*success作為參數丟進來就是把promise內resolve()內的參數傳入，這裡就是${num}成功*/
-        return promise(2);
-    })
-    .then(success =>{
-        console.log(success);
-        return promise(0);// 這裡被拒絕，會進入catch
-    })
-    .then(success=>{    //由於上一個階段結果是reject，所以此段不執行
-        console.log(success);
-        return promise(3);
-    })
-    .catch(fail => {
-        console.log(fail);
-    })
+// promise(1)
+//     .then(success=>{
+//         console.log(success);/*success作為參數丟進來就是把promise內resolve()內的參數傳入，這裡就是${num}成功*/
+//         return promise(2);
+//     })
+//     .then(success =>{
+//         console.log(success);
+//         return promise(0);// 這裡被拒絕，會進入catch
+//     })
+//     .then(success=>{    //由於上一個階段結果是reject，所以此段不執行
+//         console.log(success);
+//         return promise(3);
+//     })
+//     .catch(fail => {
+//         console.log(fail);
+//     })
 
 /*
 Then VS Catch 的失敗回呼差異
@@ -240,12 +240,12 @@ Finally 完成
 不帶有任何參數。這個方法適合用來作為 Ajax 已經讀取完成
 ，透過 finally 來關閉讀取的效果。
 */
-promise(1)
-    .then(success=>{
-        console.log(success);
-    }).finally(()=>{
-        console.log('done');
-    })
+// promise(1)
+//     .then(success=>{
+//         console.log(success);
+//     }).finally(()=>{
+//         console.log('done');
+//     })
 
 /*promise with AJAX*/
 let url='https://jsonplaceholder.typicode.com/todos/1';
@@ -257,7 +257,7 @@ function get(urlAddress){
         xhr.open('GET',url);
         xhr.onload=function(){
             if(xhr.status===200){
-                resolve(JSON.parse(xhr.response));
+                resolve(JSON.parse(xhr.response));//傳入resolve的參數會以資料形式傳到then裡
             }else{
                 reject(xhr.status);
             }
@@ -266,9 +266,11 @@ function get(urlAddress){
     });
 }
 
-get(url)
-    .then(res=>console.log(res))
-    .catch(res=>console.error(res));
+console.log(get(url));
+
+// get(url)
+//     .then(res=>console.log(res))
+//     .catch(res=>console.error(res));
 
 
 </script>
