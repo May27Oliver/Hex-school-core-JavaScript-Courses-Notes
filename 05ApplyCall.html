@@ -7,23 +7,86 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- apply(),call(),bind()是用來處理this的function -->
     <script>
-        var object={
-            test:function(){
-                console.log(this.name,arguments[0],arguments[1]);
-            }
-        }
+        // var object={
+        //     test:function(){
+        //         console.log(this.name,arguments[0],arguments[1]);
+        //     }
+        // }
 
-        var man={name:'blackie'};
-        var woman={name:'karma'};
+        // var man={name:'blackie'};
+        // var woman={name:'karma'};
 
         //Apply()
-        console.log("This Apply");
-        object.test.apply(man,['male','28']);
+        // console.log("This Apply");
+        // object.test.apply(man,['male','28']);//將object.test這個function的this apply進man裡，陣列裡的值變成argument[0]、argument[1]
 
         //Call()
-        console.log("This Call");
-        object.test.call(woman,'female','27');
+        // console.log("This Call");
+        // object.test.call(woman,'female','27');
+
+    /*範例二*/
+    // 超人
+    var superMan={
+        earthName:'Clark Kent',
+        KryptonName:'Kal-El',
+        getAllName: function(){
+            var allname = this.earthName +' and '+this.KryptonName;
+            return allname;
+        }
+    } 
+    // console.log(superMan.getAllName());
+
+    //建立一個function，裡面有嘿嘿嘿的this，有this又有物件，香啊~
+    var logName = function(log1,log2){
+        console.log('Logged:'+this.getAllName())
+        console.log('Arguments:'+log1+' '+log2);
+        console.log(this)
+    }
+
+    // 如果此時直接呼叫logName，會出現getAllName is not a function的錯誤，因為直接呼叫時this指向全域。
+
+    /* bind() */ 
+    // 可以藉由bind()來綁定logName的this指向superMan
+    // var logPersonName=logName.bind(superMan);
+    // logPersonName('bibi');
+
+    /*
+    這裡logName用了.運算子去取用函式內建方法bind()，同時把superMan當參數傳入，此時電腦記憶體會複製一個logName函式，
+    這個複製版logName函式的this指向superMan物件，也就是說，變數logPersonName指向的是新的(另一個)logName函式，
+    原本的logName依舊沒變，直接呼叫仍舊會出現is not a function，只有在呼叫logPersonName()才會指向superMan這個物件，
+    bind()還具有創造函式的拷貝版的功能，透過傳入物件來綁定他的this是誰。
+    */ 
+
+    /*call()*/ 
+    /* call()會立刻執行。跟bind()不同的是call()傳入參數後會立刻執行，因此直接把superMan這個物件丟進call()內
+    可馬上看到this指向superMan內的getAllName，而執行原函式所需的參數可以接續物件帶入call()中*/
+    // logName.call(superMan,"en","es");
+
+    /*apply()*/
+    /*
+    apply()跟call()一樣丟入物件後會直接執行函式，也跟call一樣可在物件背後加入參數，惟參數必須以陣列形式出現。
+    */
+    // logName.apply(superMan,["en","es"]);
+
+    /*function borrowing*/
+    /*apply除了可以綁定this，也可以代替某物件向其他物件借函式用，我們在下面再宣告一個superGirl物件，superGirl沒有getAllName這個function()*/
+    var superGirl={
+        earthName:'Kara',
+        KryptonName:'Zor-El',
+    };
+
+    console.log(superMan.getAllName.apply(superGirl));
+    /*此時apply便替superGirl向superMan借來getAllName這個函式*/ 
+
+    /*bind()除了可以帶入欲綁定this的物件，也可以帶入函式的參數，
+    bind帶入的參數會成為這個函式參數的預設值，例如：*/
+    function multiply(a,b){
+        return a*b;
+    } 
+    var multiplyByTwo = multiply.bind(this,2);
+    console.log(multiplyByTwo(4));//預設a會是2，帶入4
     </script>
 </body>
 </html>
