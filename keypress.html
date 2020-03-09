@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<input type="text" name="search" id="search" placeholder="请输入搜索内容">
+<script>
+//為了怕有Mr./Ms. Bumbler在首字輸入中文，我把26個英文字母做成陣列
+let alpha=["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+    
+//為了怕有 Mr.Ms. Bumbler在一個索引值裡輸入兩位以上的數字，我把數字1~9做成陣列
+let num=['0','1','2','3','4','5','6','7','8','9'];
+
+var search = document.getElementById("search");
+let arr=[];
+// 偵測輸入的值是否為英文字
+search.addEventListener('keypress',function(e){
+    let eKeyValue=e || window.event;
+    arr.push(eKeyValue.key);
+    if(arr.length===1 && alpha.indexOf(eKeyValue.key)===-1){
+        eKeyValue.preventDefault();
+        alert("首字請輸入大寫英文哦~~");
+        arr.pop();
+    }else if(1<arr.length && arr.length<10 && num.indexOf(eKeyValue.key)===-1){
+        eKeyValue.preventDefault();
+        alert('這裡請輸入數字哦！');
+        arr.pop();
+    }else if(arr.length>10){
+        eKeyValue.preventDefault();
+        alert('身分證只有十位數哦！');
+    }
+});
+</script>
+</body>
+</html>

@@ -10,22 +10,22 @@
 <script>
 
 //多給參數的狀況、arguments、全域變數、this
-// var globalVariable = '全域變數';
-// var obj = {
-//     aFunction:function(para){//2.但函式只有一個參數值
-//         var localVariables='區域變數';
-//         console.log(para, localVariables, arguments,this,globalVariable);
-//         /*包含傳入的參數
-//         3.console.log印出'一段描述'，2,3省略，因為aFunction只有para一個參數值
-//         4.印出localVariable-->'區域變數'
-//         5.arguments 無論傳入多少參數都會傳進arguments
-//         6.this 誰呼叫函式就會指向誰，這裡是aFunction
-//         7.globalVariable 全域變數，來自於外層的變數
-//         */
+var globalVariable = '全域變數';
+var obj = {
+    aFunction:function(para){//2.但函式只有一個參數值
+        var localVariables='區域變數';
+        console.log(para, localVariables, arguments,this,globalVariable);
+        /*包含傳入的參數
+        3.console.log印出'一段描述'，2,3省略，因為aFunction只有para一個參數值
+        4.印出localVariable-->'區域變數'
+        5.arguments 無論傳入多少參數都會傳進arguments
+        6.this 誰呼叫函式就會指向誰，這裡是aFunction
+        7.globalVariable 全域變數，來自於外層的變數
+        */
          
-//     }
-// }
-
+    }
+}
+obj.aFunction('我就爛');
 
 //參數其實就是函式裡的變數宣告
 // obj.aFunction('一段描述',2,3);//1.丟入三個參數
@@ -70,14 +70,14 @@
 
 // functionB(callSomeone);
 
-function callArg(a){
-    console.log(a, arguments);
-    // arguments是類陣列，並無法使用陣列所有的方法
-    for(let index = 0;index<arguments.length;index++){
-        console.log(arguments[index]);
-    }
-}
-callArg(1,2,3,'4')
+// function callArg(a){
+//     console.log(a, arguments);
+//     // arguments是類陣列，並無法使用陣列所有的方法
+//     for(let index = 0;index<arguments.length;index++){
+//         console.log(arguments[index]);
+//     }
+// }
+// callArg(1,2,3,'4')
 </script>    
 </body>
 </html>

@@ -34,23 +34,23 @@
     /*所謂閉包，就是指當函式內部的函式被回傳後，除了自己本身的程式碼外，也可以透過範圍鍊取得當時函式內部環境的變數值，由於呼叫函式以前範圍鍊就建立了，因此有了可以傳值給外部的功能
     閉包的好處是避免全域變數可能會造成無可預期的錯誤，比方被覆蓋等等。
     */
-    function storeMoney(){
-        var money = 1000;
-        return function(price){
-            money = money + price;
-            return money;
-        }
-    }
-    console.log(storeMoney()(1000));//這裡storeMoney()內的var不會在函式結束後被削掉，因為有參照。
-    var MingMoney = storeMoney();
-    console.log("MingMoney: " + MingMoney(100));//因為記憶體空間不會被釋放，每呼叫一次MingMoney裡的money數值會不斷上升
-    console.log("MingMoney: " + MingMoney(100));
-    console.log("MingMoney: " + MingMoney(100));
+    // function storeMoney(){
+    //     var money = 1000;
+    //     return function(price){
+    //         money = money + price;
+    //         return money;
+    //     }
+    // }
+    // console.log(storeMoney()(1000));//這裡storeMoney()內的var不會在函式結束後被削掉，因為有參照。
+    // var MingMoney = storeMoney();
+    // console.log("MingMoney: " + MingMoney(100));//因為記憶體空間不會被釋放，每呼叫一次MingMoney裡的money數值會不斷上升
+    // console.log("MingMoney: " + MingMoney(100));
+    // console.log("MingMoney: " + MingMoney(100));
 
-    var jayMoney = storeMoney();//jayMoney與MingMoney回傳的是不同的money
-    console.log("jayMoney: " + jayMoney(1000));
-    console.log("jayMoney: " + jayMoney(1000));
-    console.log("jayMoney: " + jayMoney(1000));
+    // var jayMoney = storeMoney();//jayMoney與MingMoney回傳的是不同的money
+    // console.log("jayMoney: " + jayMoney(1000));
+    // console.log("jayMoney: " + jayMoney(1000));
+    // console.log("jayMoney: " + jayMoney(1000));
 
     /*MingMoney和jayMoney雖然都參照money，但使用的卻是不同的money的記憶體空間*/
 
@@ -69,10 +69,10 @@
         this.isEmpty = function(){
             return items.length == 0;
         };
-        this.clear - function(){
+        this.clear = function(){
             items = [];
         };
-        this.size - function(){
+        this.size = function(){
             return items.length;
         };
         this.print = function(){
