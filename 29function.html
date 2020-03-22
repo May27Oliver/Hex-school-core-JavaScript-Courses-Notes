@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="assert.js"></script>
 </head>
 <body>
 <script>
@@ -55,6 +56,127 @@ function callsomeone(fn){
 }
 
 callsomeone(function(){ console.log('執行函式')});//匿名函式不用名稱也能作為參數丟進函式裡
+
+/*
+20200314補充 Ninja第三章內容
+函式宣告式：必須有函式名稱。
+函式表達式：不一定要有函式名稱。
+*/ 
+
+console.log("---+-function------");
+console.log("有加+-");
+!function(){console.log("hey~")}();
++function(){console.log("have you bought the masks")}();
+-function(){console.log("for fear getting wuhan virus?")}();
+~function(){console.log("have you?")}();
+/*
+在function前面加上+-!~符號意思都一樣，都是告訴瀏覽器核心這是IFEE立即執行函式
+立即執行的是一個＂函式表達式＂，不一定要有名稱。
+於是在function(){}結尾處再加上()則會立刻執行function不會出錯
+沒加+-!~瀏覽器則會以為這是宣告函式。
+*/ 
+
+/*函式參數、函式引數*/ 
+console.log("========函式參數、函式引數======")
+/*
+參數是我們在函式定義中所列出的變數:function fn(para1,para2){...};
+引數是當我們呼叫函式時傳遞給它的值:fn(arg1,arg2);
+如果呼叫函式時引數比參數還多，並不會出錯，則多的引數並不會被指派近函式的參數中
+*/
+
+console.log("=========不定參數=========");
+/*不定參數會把所有呼叫時＂沒有被定義在參數內多出來的引數＂投入一個陣列中*/ 
+function multiMax(first,...remainingNumbers){
+    var sorted=remainingNumbers.sort(function(a,b){
+        console.log('挖系a',a);
+        console.log('挖系b',b);
+        return b-a;
+    });
+    return first*sorted[0];
+}
+console.log(multiMax(3,1,2,3));
+// assert(multiMax(3,1,2,3)===9,"3*3=9(First arg, by largest.)")
+/*
+sort()函式：
+arr.sort(function(a,b){
+    return a-b;
+});
+a-b意指按順序由數字小排到數字大，輸入a-b會整個數字一起比，
+只有sort的話只比最前的那位數如sort([10,2])，10會在2前面，只比1和2
+
+arr.sort(function(){
+    return b-a;
+})
+b-a，由大排到小。       
+*/ 
+
+/*函式做為方法呼叫*/
+/*當函式被指派給物件的屬性，並使用該屬性呼叫函式時，函式就是作為物件的方法來呼叫
+var ninja = {}
+ninja.skulk = function(){};
+ninja.skulk();
+*/  
+
+/*函式呼叫與方法呼叫的差異*/  
+
+function whatsMyContext(){
+    return this;
+}
+
+assert(whatsMyContext()===window,"Function call on window");
+/*return this 可回傳函式背景空間，讓我們可用來從外部對函式內部做檢視，此處是window
+*/  
+
+var getMyThis = whatsMyContext;
+
+assert(getMyThis()===window,"Anthor function call in window");
+
+var ninja1={
+    getMyThis:whatsMyContext
+}
+
+console.log("誰叫了?誰叫了？",whatsMyContext());
+
+assert(ninja1.getMyThis() === ninja1,"working with 1st ninja");
+
+/* 使用建構器函式來建立共用的物件 */
+/* 使用 new 方法呼叫函式時，會建立一個空的物件實例，並將其作為函式的背景空間(this所指之處)傳遞給函式，
+建構器會再這個物件上建立一個名為skulk的屬性，並指派函式給他，使該函式成為新物件的一個方法*/ 
+function Ninja(){
+    this.skulk = function(){
+        return this;
+    }
+} 
+
+var ninja1 = new Ninja();
+var ninja2 = new Ninja();
+
+assert(ninja1.skulk()===ninja1,"The 1st ninja is skulking");
+assert(ninja2.skulk()===ninja2,"The 2nd ninja is skulking");
+
+/* 以特定物件作為回傳值的建構器函式 */ 
+/*這個地方超神奇，照理來說，this應該會指向new時所產生的新物件，並把建構函式內的函式和this變數作為鍵值指派給這個新物件
+但如果建構函式最後回傳了一個物件，則新物件就會被棄置不用。
+*/ 
+var puppet = {
+    rules: false,
+}
+
+function Emperor(){
+    this.rules = true;
+    return puppet;
+}
+
+var emperor=new Emperor();
+
+console.log('emperor!!',typeof(emperor));
+console.log('Emperor!!',typeof(Emperor));
+
+assert(emperor === puppet,"The emperor is merely a puppet!!")
+/*新物件被棄置，puppet成為emperor，這個return並沒有賦予emperor新的記憶體空間，只是傳puppet的位址給emperor*/
+assert(emperor.rules === false,"The puppet doesn't know how to rule!!")
+/*但如果從建構函式回傳的不是一個物件，則回傳值會被忽略，並最終會回傳那個新建立的物件*/ 
+
 </script>
 </body>
 </html>

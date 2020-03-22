@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*函式生成器：
+生成器是可以離開後再次進入的函式。在兩次進入之間，生成器的執行狀態（變數綁定狀態）會被儲存。
+
+生成器函式幾乎是一個完全嶄新的函式型別，他和標準的普通函式完全不同。生成器(generator)函式能生成一組值的序列，但每個值的生成是基於每次請求，並不同於標準函式那樣立即生成。我們必須顯示地向生成器請求一個新的值，隨後生成器要麼響應一個新生成的值，要麼就告訴我們它之後不會再生成新值。每當生成器函式生成了一個值，它都不會像普通函式一樣停止執行。相反，生成器幾乎不掛起。隨後，當對另一個值的請求到來後，生成器就會從上次離開的位置恢復執行。
+*/ 
+console.log("------------使用生成器函式生成一些列值--------------------");
+//通過在關鍵字function後面新增星號*，定義生成器函式
+function* WeaponGenerator() {
+  //使用新的關鍵字yield生成獨立的值
+  yield "Katana";
+  yield "Wakizashi";
+  yield "Kusarigama";
+}
+//使用新的迴圈型別for-of取出生成的值序列
+for (let weapon of WeaponGenerator()) {
+  if (weapon !== undefined) {
+    console.log("weapon:" + weapon);
+  }
+}
+
+/*生成器與for迴圈之間的關係*/
+function* generatorForLoop(num){
+    for(let i = 0;i < num; i++){
+        yield console.log(i);
+    }
+} 
+
+const genForLoop = generatorForLoop(5);
+genForLoop.next();//0 
+genForLoop.next();//1
+genForLoop.next();//2
+genForLoop.next();//3
+genForLoop.next();//4
+
+/*
+生成器最重要的特性 —— 只有在需要的時候它才會產生下一個值
+，而不會一次性產生所有的值。在某些情景下，這種特性十分方便。
+*/
+
+/*藉由函式生成器回傳不同callback function的結果*/ 
+console.log("測試函式生成器印出callbackfunction");
+function* mirror(...remain){
+  for(let i = 0;i<remain.length;i++ ){
+    yield remain[i]();
+  }
+}
+
+function born(){
+  console.log("Hello World!");
+}
+
+function growth(){
+  console.log("go to high school!");
+}
+
+function collage(){
+  console.log("go to collage!");
+}
+
+function graduate(){
+  console.log("go to work!");
+}
+
+let mirr = mirror(born,growth,collage,graduate);
+mirr.next();
+mirr.next();
+mirr.next();
+mirr.next();
+
+</script>
+</body>
+</html>
