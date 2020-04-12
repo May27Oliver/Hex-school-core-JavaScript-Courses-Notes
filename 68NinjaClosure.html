@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="assert.js"></script>
+<script>
+    // var outerValue = "ninja";
+    // function outerFunction(){
+    //     assert(outerValue==="ninja","I can see the ninja.");
+    // }
+    // outerFunction();
+
+    /*var outerValue = "samurai";
+    var later;
+
+    function outerFunction(){
+        var innerValue = "ninja";
+
+        function innerFunction(){
+            assert(outerValue === "samurai","I can see samurai.")
+            assert(innerValue === "ninja","I can see the ninja.")
+        }
+        later = innerFunction;
+    }
+
+    outerFunction();
+    later();*/
+    //因為閉包的關係 innerfunction作用範圍還在
+
+    /*閉包，在函式定義時為函式及所屬的範圍建立了一個安全氣泡，讓函式具有執行時所需要的所有東西。
+    這個氣泡含有函式和它的變數，並擁有與函式相同的存活時間
+    
+    每個經由閉包來存取資料的函式都有一個＂球與鍊＂附加至上頭，以攜帶這些資訊，這些都還是保存在記憶體內。
+    
+    閉包允許函式存取在定義時作用範圍中的所有變數。這麼一來，即使函式所屬範圍已經不存在了，他仍然擁有執行時所需的所有資訊。
+
+    在下列用途上可用閉包：
+    1.模擬私有變數，藉由方法閉包（method closure）來封住建構器函式的變數。
+    2.用於處理回呼，可大幅簡化我們的程式碼。
+
+    一個函式可以存取那些變數，追蹤那識別項在函式定義時便決定，不會因為函式在哪個執行背景空間執行有所改變，因此閉包的原理就產生，
+    即使建立函式時的作用範圍已經不存在，閉包仍舊可以存取所有函式建立時的所有識別項。
+    */
+
+    /*在回呼計時器內使用閉包*/
+
+
+</script>
+<body>
+    <!--<div id="box1">First Box</div>建立要加上動畫效果的網頁元素-->
+    <script>
+        // function animateIt(elementId){
+        //     var elem = document.getElementById(elementId);
+        //     var tick=0;
+        //     var timer= setInterval(function(){
+        //         if(tick < 100){
+        //             elem.style.left=elem.style.top=tick+'px';
+        //             tick++;
+        //         }else{
+        //             clearInterval(timer);
+
+        //             assert(tick ===100,"Tick accessed via a closure.");
+        //             assert(elem,"element also accessed via a closure.");
+        //             assert(timer,"Timer reference also obtained via a closure.");
+        //         }
+        //     },10);
+        // }
+        // animateIt("box1");
+
+        function Ninja(){
+            var feints = 0;
+            this.getFeints = function(){
+                return feints;
+            };
+            this.feint = function(){
+                feints++;
+            }
+        }
+        Ninja.prototype.sayHi=function(){//如果要新增一個可以讓建構式分享給物件實字的方法，可以定義在prototype內
+            console.log('I love my Job');
+        }
+
+        var ninja1 = new Ninja();
+        console.log('typeof Ninja',typeof Ninja);
+        console.log('typeof ninja1',typeof ninja1);/*顯見變數不會被建構函式建構到新物件內，*/
+        /*scope是指編譯器藉由javascript引擎查找識別名稱的一組規則
+        ，而劃分範疇的單位可分為兩種-函式範疇與區塊範疇，也就是說，每個「函式」或「區塊」是可以建立各自的範疇。
+        在 ES6 以前，只有函式能建立範疇，而在 ES6 之後，可用大括號 { ... } 定義區塊範疇，讓 const 和 let 宣告以區塊為範疇的變數。
+        全域範疇無法存取函式範疇(scope)內的變數藉以達到變數的隱私與命名不衝突性*/
+
+        /*閉包的原理與範疇(scope)息息相關，建構函式new一個物件實物時便會產生一個建構函式的範疇(scope)，讓物件實物裡的函式追蹤識別名稱
+        時能在建構函式內查找，如果物件實物裡的呼叫未宣告的變數，javascript引擎就會去建構函式內查找，閉包讓javascript有接近私有變數的概念*/
+        
+        assert(ninja1.feints === undefined,"And the private data is inaccessible to us.");
+        ninja1.feint();
+        assert(ninja1.getFeints()===1,"We're able to access the internal feint count.")
+
+        var ninja2 = new Ninja();
+        console.log('typeof ninja2',typeof ninja2);
+        assert(ninja2.getFeints()===0,"The second ninja object gets its own feints variable.");
+    </script>
+</body>
+</html>

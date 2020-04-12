@@ -8,6 +8,7 @@
     <script src="assert.js"></script>
 </head>
 <body>
+    <button id="test">Click me!</button>
 <script>
 // function afunction(parameter){
 //     var localVariable = "區域變數";
@@ -177,6 +178,79 @@ assert(emperor === puppet,"The emperor is merely a puppet!!")
 assert(emperor.rules === false,"The puppet doesn't know how to rule!!")
 /*但如果從建構函式回傳的不是一個物件，則回傳值會被忽略，並最終會回傳那個新建立的物件*/ 
 
+/*單純呼叫建構函式的狀況*/
+function Ninja(){
+    this.skulk = function(){
+        return this;
+    }
+} 
+
+var whatever = Ninja();
+/*如果將Ninja作為一般函式呼叫，但skulk屬性在普通模式下將被建立在window物件上，在嚴格模式下則會建立在undefined上*/
+/*函式和方法通常以一個描述他們在做什麼的動詞開始，以小寫字母開頭，而建構器通常用一個描述物件本身的名詞來命名，並以大寫字母開頭*/  
+
+console.log("===============call & bind & apply=====================");
+// function Button(){
+//     this.clicked = false;
+//     this.click = function(){
+//         this.clicked = true;
+//         assert(button.clicked,"the button has been clicked");
+//     }
+// }
+
+// var button = new Button();
+// var elem = document.getElementById("test");
+// elem.addEventListener("click",button.click);
+/*從上面的例子可以知道，click按鈕下去所指向的是html button而不是new Button所建立的物件button，所以這邊button.click會錯誤*/ 
+/*但同樣的狀況，如果function(){}改以箭頭函式書寫則可以成功*/
+console.log("==========Arrow function===========")
+// function Button(){
+//     this.clicked = false;
+//     this.click = ()=>{
+//         this.clicked = true;
+//         assert(button.clicked,"the button has been clicked");
+//     };
+// }
+// var button = new Button();
+// var elem = document.getElementById("test");
+// elem.addEventListener("click",button.click);
+
+// 因為箭頭函式沒有自己的背景空間，而是由定義他們的函式繼承而來。上面的箭頭函式this是指向button物件
+console.log("======物件實字======");
+// var button = {
+//     clicked:false,
+//     click:()=>{
+//         this.clicked = true;
+//         assert(button.clicked,"The button has been clicked");
+//         assert(this === window,"In arrow function this === window");
+//         assert(window.clicked,"clicked is stored in window");
+//     }
+// }
+
+// var elem = document.getElementById("test");
+// elem.addEventListener("click",button.click);
+// 由於Click箭頭函式是建立為物件實值上的一個屬性，同時物件實值是建立在全域程式碼中，所以箭頭函式的this值會是全域程式的this
+console.log("======bind======");
+var button = {
+    clicked:false,
+    click:function(){
+        this.clicked = true;
+        assert(button.clicked,"the button has been clicked");
+    }
+};
+var elem = document.getElementById("test");
+elem.addEventListener("click",button.click.bind(button));
+
+var boundFunction = button.click.bind(button);
+assert(boundFunction != button.click,"Calling bind creates a completly new function");
+/*每一個函式都可以用bind方法，他會建立並回傳一個新函式，是綁定了指定的物件（本案例中是button物件）。this參數值會始終是設定為該物件，
+而不論綁定函式的方式為何，除此之外，綁定函式的行為就類似於原始的函式，因為他們的程式碼是相同的 */ 
+
+/*
+p.s.
+call、apply皆是回傳function執行結果
+bind方法回傳的是綁定 this 後的原函數
+*/
 </script>
 </body>
 </html>

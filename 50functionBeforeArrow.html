@@ -19,9 +19,10 @@
     //Uncaught ReferenceError: arguments is not definedS
     
     //在箭頭函式中使用區域參數即可替代arguments
-    // const nums =(...arg)=>console.log(arg);
-    // nums(10,50,100,50,5,1,1,1,500);
-
+    const nums =(...arg)=>console.log(arg);
+    nums(10,50,100,50,5,1,1,1,500);
+    
+    //!!!!!!!!!!一般模式下arguments在function內可以替換掉parameter，但在嚴格模式下無法。!!!!!!!
 
     //#This 綁定的差異
     //箭頭函式沒有自己的this，this會直接指向外層。

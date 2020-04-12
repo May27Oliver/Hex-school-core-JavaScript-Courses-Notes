@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="assert.js"></script>
+</head>
+<body>
+    <div id="box1">First Box</div>
+    <div id="box2">Second Box</div>
+<script>
+    function animateIt(elementId){
+        var elem= document.getElementById(elementId);
+        var tick = 0;
+        var timer = setInterval(function(){
+            if(tick < 100){
+                elem.style.left = elem.style.top = tick + "px";
+                tick++;
+            }
+            else {
+                clearInterval(timer);
+                assert(tick===100,
+                "Tick accessed via a closure.");
+                assert(elem,"Element also accessed via a closure.");
+                assert(timer,
+                "Timer reference also obtained via a closure.");
+            }
+        },100);
+    }
+    animateIt('box1');
+    animateIt('box2');
+
+    /*每次我們呼叫animateIt函式時，都會建立一個新的函式字彙環境，他追蹤動畫裡一組重要的變數：elementId,elem,tick以及timer（執行動畫的計時器id值）
+    只要還有函式透過閉包來使用變數，變數所在的環境就會持續下來。在這個例子裡，瀏覽器會讓setInterval裡的回呼函式一直持續著，直到我們呼叫clearInterval程式*/
+</script>
+</body>
+</html>

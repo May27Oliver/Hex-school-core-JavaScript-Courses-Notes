@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+    body{
+        font-family: "微軟正黑體";
+    }
+    *{
+        /* border: 1px solid red; */
+    }
+    .menu-box{
+        width: 40%;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        margin:auto
+    }
+    header{
+        margin:10px auto;
+    }
+    footer{
+        margin: auto;
+        padding: 10px 0;
+    }
+    .input-box{
+        display: flex;
+    }
+
+    .input-box:last-child{
+        margin-bottom: 350px;
+    }
+
+    .menu{
+        flex: 1;
+        overflow: auto;
+    }
+    .menu::-webkit-scrollbar {display:none}
+    label{
+        flex: 1;
+        margin: 20px 0;
+        line-height: 35px;
+        text-align:right;
+    }
+    .input-column{
+        width: 80%;
+        align-items: center;
+        line-height: 35px;
+        margin: 20px 0;
+        padding-left: 10px;
+        
+    }
+</style>
+<body>
+    <div class="menu-box">
+        <header>檢查表</header>
+            <div class="menu">
+                <div class="input-box">
+                    <label>帳號:&nbsp&nbsp</label><input id="ancho-1" type="text"  class="input-column" placeholder="Account">
+                </div>
+                <div class="input-box" >
+                    <label>密碼:&nbsp&nbsp</label><input id="ancho-2" type="password"class="input-column" placeholder="Password">
+                </div>
+                <div class="input-box">
+                    <label>E-mail:&nbsp&nbsp</label><input id="ancho-3" type="email" class="input-column" placeholder="E-mail">
+                </div>
+                <div class="input-box">
+                    <label>生日:&nbsp&nbsp</label><input id="ancho-4" type="text" class="input-column" placeholder="Birthday">
+                </div>
+                <div class="input-box">
+                    <label>地址:&nbsp&nbsp</label><input id="ancho-5" type="text" class="input-column" placeholder="Address">
+                </div>
+                <div class="input-box">
+                    <label>國籍:&nbsp&nbsp</label><input id="ancho-6" type="text" class="input-column" placeholder="Nationality">
+                </div>
+                <div class="input-box">
+                    <label>職業:&nbsp&nbsp</label><input id="ancho-7"type="text" class="input-column" placeholder="Job">
+                </div>
+                <div class="input-box">
+                    <label>體重:&nbsp&nbsp</label><input id="ancho-8" type="text" class="input-column" placeholder="Weight">
+                </div>
+                <div class="input-box">
+                    <label>身高:&nbsp&nbsp</label><input id="ancho-9" type="text" class="input-column" placeholder="Height">
+                </div>
+                <div class="input-box">
+                  <label>隔離天數:&nbsp&nbsp</label><input id="ancho-10" type="text" class="input-column" placeholder="Case isolation day">  
+                </div>
+                <div class="input-box">
+                    <label>緊急聯絡人:&nbsp&nbsp</label><input id="ancho-11" type="text" class="input-column" placeholder="Emergent Contact Person">
+                </div>
+                <div class="input-box">
+                    <label>性別:&nbsp&nbsp</label><input id="ancho-12" type="text" class="input-column" placeholder="Gender">
+                </div>
+                <div class="input-box">
+                    <label>病歷:&nbsp&nbsp</label><input id="ancho-13" type="text"class="input-column" placeholder="Resume">
+                </div>
+            </div>
+        <footer>
+            <input type="submit" value="送出" style="font-family: '微軟正黑體';">
+        </footer>
+    </div>
+    <script>
+        let ancho_box=[];
+        let input_box = document.querySelectorAll(".input-box");//先算出總共有幾個input
+        let menu = document.querySelector('.menu').getBoundingClientRect();//menu欄位到瀏覽器上緣的距離
+        for(let i = 0 ; i < input_box.length ; i++){
+            ancho_box.push(document.getElementById(`ancho-${i+1}`));
+        }
+
+        ancho_box.forEach(function(item){
+            item.addEventListener('focus',()=>{
+                if(item.getBoundingClientRect().top-menu.top > (menu.height-300)){
+                    $('.menu').animate({scrollTop:item.getBoundingClientRect().top-ancho_box[0].getBoundingClientRect().top},'slow');
+                }
+            })
+        })
+    </script>
+</body>
+</html>
